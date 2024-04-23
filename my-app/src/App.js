@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import homepage from './components/pages/homepage'; // Make sure to capitalize component names
+import Homepage from './components/pages/Homepage';
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
           </ul>
         </nav>
         <Routes>
-          <Route path="/" element={<homepage />} /> {/* Use `element` prop and self-closing tags */}
+          <Route path="/" element={<Homepage/>} /> {/* Use `element` prop and self-closing tags */}
           <Route path="/about" element={<p>About Page</p>} /> {/* Example for About */}
           <Route path="/contact" element={<p>Contact Page</p>} /> {/* Example for Contact */}
         </Routes>
