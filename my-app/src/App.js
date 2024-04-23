@@ -4,6 +4,9 @@ import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Homepage from './components/pages/Homepage';
+import SignUp from './components/pages/Signup';
+import Signin from './components/pages/Signin';
+import Layout from './components/pages/layout';
 
 // Define the main theme using Material-UI's createTheme
 const theme = createTheme({
@@ -23,7 +26,10 @@ function App() {
     <Router>
       <div>
         <Routes>
-          <Route path="/" element={<Homepage />} />
+          <Route path="/" element={<Layout><Homepage /></Layout>} />
+          <Route path="/Signup" element={<Layout><SignUp /></Layout>} />
+          <Route path="/Signin" element={<Layout><Signin /></Layout>} />
+
         </Routes>
       </div>
     </Router>
