@@ -1,12 +1,12 @@
 import React from 'react';
 
-function AboutPage() {
+function Homepage() {
   return (
     <div>
-      <h1>About Us</h1>
-      <p>This is the about page of our website.</p>
+      <h1>Welcome to the Homepage!</h1>
+      <p>This is the content of the Homepage.</p>
     </div>
   );
 }
 
-export default AboutPage;
+export default Homepage;
