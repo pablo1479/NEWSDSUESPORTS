@@ -6,40 +6,34 @@ import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
 import logoImage from './esportslogonew.jpeg';  // Importing the logo image
 import Typography from '@mui/material/Typography';  // Importing Typography
+import MenuItem from '@mui/material/MenuItem';  // Importing MenuItem
+import { useNavigate } from 'react-router-dom';
 
 const pages = ['Home', 'About', 'Merch', 'Stream', 'Stats'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const navigate = useNavigate(); // Updated to useNavigate hook
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
+  const handleLogin = () => {
+    // Redirect user to Signup page when login button is clicked
+    navigate('/Signup');  // Updated to use navigate
   };
 
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
           <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2, alignItems: 'center' }}>
             <img src={logoImage} alt="Logo" style={{ height: 30 }} />
           </Box>
@@ -97,38 +91,16 @@ function ResponsiveAppBar() {
             ))}
           </Box>
 
+          {/* Log In Button */}
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+            <Button color="inherit" sx={{ my: 2, display: 'block' }} onClick={handleLogin}>
+              Sign up / Log in
+            </Button>
           </Box>
         </Toolbar>
       </Container>
     </AppBar>
   );
 }
+
 export default ResponsiveAppBar;
