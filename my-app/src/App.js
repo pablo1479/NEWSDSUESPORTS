@@ -1,7 +1,23 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 import Homepage from './components/pages/Homepage';
 
+// Define the main theme using Material-UI's createTheme
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#ff0000',  // Custom red color
+    },
+    text: {
+      primary: '#ffffff',  // White text
+    },
+  },
+});
+
+// App component containing the Router and navigation links
 function App() {
   return (
     <Router>
@@ -20,13 +36,25 @@ function App() {
           </ul>
         </nav>
         <Routes>
-          <Route path="/" element={<Homepage/>} /> {/* Use `element` prop and self-closing tags */}
-          <Route path="/about" element={<p>About Page</p>} /> {/* Example for About */}
-          <Route path="/contact" element={<p>Contact Page</p>} /> {/* Example for Contact */}
+          <Route path="/" element={<Homepage />} />
+          <Route path="/about" element={<p>About Page</p>} />
+          <Route path="/contact" element={<p>Contact Page</p>} />
         </Routes>
       </div>
     </Router>
   );
 }
 
-export default App;
+// Main component that wraps the App with the ThemeProvider
+function Main() {
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline /> {/* Normalize CSS for material components */}
+      <App />
+    </ThemeProvider>
+  );
+}
+
+// Render the Main component into the DOM
+ReactDOM.render(<Main />, document.getElementById('root'));
+export default App; // Ensure this line is present to export 'App'
