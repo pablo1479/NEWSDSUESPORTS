@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import Homepage from './components/pages/Homepage';
+import HomePage from './components/pages/Homepage';
 import SignUp from './components/pages/Signup';
 import Signin from './components/pages/Signin';
 import Layout from './components/pages/layout';
@@ -12,24 +12,27 @@ import Layout from './components/pages/layout';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#ff0000',  // Custom red color
+      main: '#D41736', // Custom red color
     },
     text: {
-      primary: '#ffffff',  // White text
+      primary: '#333', // Dark grey text
     },
   },
 });
-
 // App component containing the Router and navigation links
 function App() {
+
   return (
     <Router>
       <div>
         <Routes>
-          <Route path="/" element={<Layout><Homepage /></Layout>} />
+          <Route path="/" element={<Layout><HomePage /></Layout>} />
           <Route path="/Signup" element={<Layout><SignUp /></Layout>} />
           <Route path="/Signin" element={<Layout><Signin /></Layout>} />
-
+          {/* <Route path="/about" element={<AboutPage />} /> */}
+          {/* <Route path="/merch" element={<MerchPage />} /> */}
+          {/* <Route path="/stream" element={<StreamPage />} /> */}
+          {/* <Route path="/stats" element={<StatsPage />} /> */}
         </Routes>
       </div>
     </Router>
