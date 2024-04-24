@@ -1,7 +1,7 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import merchandiseImage from './merchandise.jpg'; // Ensure the image path is correct
+import merchandiseImage from './aztec_gaming_banner.jpg'; // Ensure the image path is correct
 
 function MerchPage() {
     return (
@@ -12,7 +12,7 @@ function MerchPage() {
                 width: '100%',
                 overflow: 'hidden'
             }}>
-                <img src={merchandiseImage} alt="Merchandise" style={{ width: '100%', height: 'auto' }} />
+                { <img src={merchandiseImage} alt="Merchandise" style={{ width: '50%', height: 'auto' }} />}
                 <Box sx={{
                     position: 'absolute',
                     top: 0,
@@ -23,7 +23,7 @@ function MerchPage() {
                     flexDirection: 'column',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    color: '#FFFFFF', // Adjusted to white for better visibility
+                    color: '#000000', // Adjusted to white for better visibility
                     backgroundColor: 'rgba(0, 0, 0, 0.5)', // Adds a dark overlay for better readability
                     padding: '1rem'
                 }}>
