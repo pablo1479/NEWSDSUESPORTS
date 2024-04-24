@@ -1,56 +1,129 @@
-import React from 'react';
-import './homestyles.css';
-import SDSUGamingCenterImage from './SDSU Gaming Center.jpg'; // Import your image
+import React, { useEffect } from 'react';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
-function App() {
+// Image imports
+import fifa23 from './fifa23.jpeg';
+import supersmashbros from './supersmashbros.jpeg';
+import legendofzelda from './legendofzelda.jpeg';
+import nba2k23 from './nba2k23.jpeg';
+import professorImage from './dogan.jpeg';  // Import the image for Professor Ugur Dogan
+
+const gameImages = [
+    { src: fifa23, title: "FIFA 23" },
+    { src: supersmashbros, title: "Super Smash Bros" },
+    { src: legendofzelda, title: "Legend of Zelda" },
+    { src: nba2k23, title: "NBA 2K23" }
+];
+
+function AboutPage() {
+    // Load Twitter script dynamically
+    useEffect(() => {
+        const script = document.createElement('script');
+        script.src = "https://platform.twitter.com/widgets.js";
+        script.async = true;
+        document.body.appendChild(script);
+        return () => {
+            document.body.removeChild(script);
+        };
+    }, []);
+
     return (
-        <div>
-            <header>
-                <h1>SDSU ESports</h1>
-            </header>
+        <Box sx={{ padding: 4 }}>
+            <Grid container spacing={2}>
+                <Grid item xs={12} md={6}>
+                    <Box sx={{
+                        padding: 2,
+                        border: `2px solid #D41736`, // Use the specific color code for the border
+                        textAlign: 'center', // Centers the text within the box
+                        margin: 'auto', // Centers the box within the grid item
+                        maxWidth: '90%', // Ensures the box doesn't span the entire width for aesthetics
+                        backgroundColor: '#fff' // optional: background color for contrast
+                    }}>
+                        <Typography variant="h4" sx={{ marginBottom: 2, color: '#D41736' }}>
+                            Mission Statement
+                        </Typography>
+                        <Typography variant="body1">
+                        The Esports Engagement Center, a collaboration among various university divisions, uses esports as a platform for educational and personal growth. Our facility supports learning and well-being through comprehensive programs like care advising, educational workshops, and extensive library services. We are dedicated to fostering both competitive and scholarly esports talents, ensuring our students have the opportunities to thrive.                           </Typography>
+                    </Box>
+                    <Box sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        marginTop: 2,
+                        padding: 2,
+                        border: `2px solid #D41736`,
+                        backgroundColor: '#fff'
+                    }}>
+                        <img src={professorImage} alt="Professor Ugur Dogan" style={{ width: 100, height: 100, marginRight: 2 }} />
+                        <Typography variant="h6" sx={{ color: '#D41736' }}>
+                            Sponsored by Professor Ugur Dogan
+                        </Typography>
+                    </Box>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <Typography variant="h4" sx={{ marginBottom: 2, textAlign: 'center', color: '#D41736' }}>
+                        Stay up to date with any upcoming events with our Twitter!
+                    </Typography>
+                    <Box sx={{
+                        height: 400, // Adjust height as needed
+                        overflow: 'auto',
+                        textAlign: 'center'
+                    }}>
+                        <a className="twitter-timeline" href="https://twitter.com/aztecgamingsdsu">
+                            Tweets by aztecgamingsdsu
+                        </a>
+                    </Box>
+                </Grid>
+            </Grid>
 
-            <main className="container">
-                <img src={SDSUGamingCenterImage} className="img-fluid rounded mx-auto d-block" alt="SDSU Gaming Center" />
-                <p className="mt-3">Welcome to the official website of the San Diego State University ESports Team!</p>
-            </main>
-            <section id="contact">
-                <h2>Contact Us</h2>
-                
-                <p>
-                    If you have any questions or feedback, 
-                    feel free to reach out to us using the form below:</p>
-                
-                <form action="#" method="post">
-                    <label htmlFor="name">Name:</label><br />
-                    <input type="text" id="name" name="name" required /><br />
-                    <label htmlFor="email">Email:</label><br />
-                    <input type="email" id="email" name="email" required /><br />
-                    <label htmlFor="message">Message:</label><br />
-                    <textarea id="message" name="message" rows="4" required></textarea><br />
-                    <input type="submit" value="Submit" />
-                </form>
-                
-                <h2>Contacts:</h2>
-                <ul>
-                    <li>Name: Robert McLintock, Email: Robert@example.com</li>
-                    <li>Name: Pablo Olivares, Email: Pablo@example.com</li>
-                    <li>Name: Brandon Reynolds, Email: Brandon@example.com</li>
-                    <li>Name: Alex Rivera, Email: Alex@example.com</li>
-                </ul>
-            </section>
-            <Footer />
-        </div>
+            <Typography variant="h5" sx={{ marginTop: 4, marginBottom: 2, textAlign: 'center', color: '#D41736' }}>
+                Games Offered
+            </Typography>
+            <Grid container spacing={2}>
+                {gameImages.map((game, index) => (
+                    <Grid item xs={12} sm={6} md={3} key={index}>
+                        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                            <img src={game.src} alt={game.title} style={{ width: '100%', height: 'auto' }} />
+                            <Typography sx={{ mt: 1, color: '#D41736' }}>{game.title}</Typography>
+                        </Box>
+                    </Grid>
+                ))}
+            </Grid>
 
-        
+            <Typography variant="h5" sx={{ marginTop: 4, marginBottom: 2, textAlign: 'center', color: '#D41736' }}>
+                Contact Us
+            </Typography>
+            <Box
+                component="form"
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    '& .MuiTextField-root': { m: 1, width: '300px' }
+                }}
+                noValidate
+                autoComplete="off"
+            >
+                <TextField required label="Name" variant="outlined" />
+                <TextField required label="Email" variant="outlined" type="email" />
+                <TextField
+                    label="Feedback"
+                    variant="outlined"
+                    multiline
+                    rows={4}
+                    fullWidth
+                    sx={{ m: 1, width: '300px' }}
+                />
+                <Button variant="contained" color="primary" sx={{ mt: 2, width: '300px', bgcolor: '#D41736', '&:hover': { bgcolor: '#bf1230' } }}>
+                    Submit
+                </Button>
+            </Box>
+        </Box>
     );
 }
 
-function Footer() {
-    return (
-        <footer className="mt-5">
-            <p>&copy; 2024 SDSU ESports Team. All rights reserved.</p>
-        </footer>
-    );
-}
-
-export default App;
+export default AboutPage;
