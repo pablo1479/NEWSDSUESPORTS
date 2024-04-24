@@ -9,14 +9,13 @@ import CssBaseline from '@mui/material/CssBaseline';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#ff0000',
+      main: '#D41736', // Custom red color
     },
     text: {
-      primary: '#ffffff',
+      primary: '#333', // Dark grey text
     },
   },
 });
-
 ReactDOM.render(
   <ThemeProvider theme={theme}>
     <CssBaseline />
