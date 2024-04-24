@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Responsiveappbar from './responsiveappbar';  // Make sure this path is correct
+import Responsiveappbar from './responsiveappbar';  
+import Footer from './Footer'; 
 
 class Layout extends Component {
   render() {
@@ -7,6 +8,8 @@ class Layout extends Component {
       <>
         <Responsiveappbar />
         <div>{this.props.children}</div>
+        <Footer />  
+
       </>
     );
   }
