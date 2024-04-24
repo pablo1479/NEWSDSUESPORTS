@@ -7,6 +7,7 @@ import HomePage from './components/pages/Homepage';
 import SignUp from './components/pages/Signup';
 import Signin from './components/pages/Signin';
 import Layout from './components/pages/layout';
+import stats from './components/pages/stats';
 
 // Define the main theme using Material-UI's createTheme
 const theme = createTheme({
@@ -32,7 +33,7 @@ function App() {
           {/* <Route path="/about" element={<AboutPage />} /> */}
           {/* <Route path="/merch" element={<MerchPage />} /> */}
           {/* <Route path="/stream" element={<StreamPage />} /> */}
-          {/* <Route path="/stats" element={<StatsPage />} /> */}
+          <Route path="/stats" element={<Layout><stats /></Layout>} />
         </Routes>
       </div>
     </Router>

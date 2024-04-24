@@ -1,14 +1,32 @@
-import React from 'react';
-import './statsstyles.css';
+import React, { useState, useEffect } from 'react';
 import Chart from 'chart.js/auto';
 
-function App() {
-    // Sample data for the bar graph
-    const playerNames = ['Alex Rivera', 'Papa Pookie', 'Pookie Pablo', 'Robert McLockedin'];
-    const winRates = [0.7, 0.6, 0.8, 0.5]; // Assuming win rates are between 0 and 1
+// Component for displaying team information
+function Team({ name, games }) {
+    const [selectedGame, setSelectedGame] = useState('');
 
-    // Creating the bar graph using Chart.js
-    React.useEffect(() => {
+    return (
+        <div className="team">
+            <h2>{name}</h2>
+            <label htmlFor={`${name.toLowerCase()}-game-select`}>Select a Game:</label>
+            <select
+                id={`${name.toLowerCase()}-game-select`}
+                className="game-select"
+                value={selectedGame}
+                onChange={(e) => setSelectedGame(e.target.value)}
+            >
+                {games.map((game, index) => (
+                    <option key={index} value={game}>{game}</option>
+                ))}
+            </select>
+            <div id={`${name.toLowerCase()}-stats`} className="stats"></div>
+        </div>
+    );
+}
+
+// Component for displaying the bar graph
+function BarGraph({ playerNames, winRates }) {
+    useEffect(() => {
         const ctx = document.getElementById('player-stats');
         const myChart = new Chart(ctx, {
             type: 'bar',
@@ -40,7 +58,25 @@ function App() {
                 }
             }
         });
-    }, []);
+
+        return () => {
+            // Cleanup code if needed
+            myChart.destroy();
+        };
+    }, [playerNames, winRates]);
+
+    return (
+        <div className="bar-graph">
+            <h2>Win vs Loss Rates</h2>
+            <canvas id="player-stats"></canvas>
+        </div>
+    );
+}
+
+function App() {
+    // Sample data for the bar graph
+    const playerNames = ['Alex Rivera', 'Papa Pookie', 'Pookie Pablo', 'Robert McLockedin'];
+    const winRates = [0.7, 0.6, 0.8, 0.5]; // Assuming win rates are between 0 and 1
 
     return (
         <div>
@@ -48,51 +84,12 @@ function App() {
                 <h1>SDSU ESports</h1>
             </header>
 
-            <div className="team">
-                <h2>Manshawdies</h2>
-                <label htmlFor="manshawdies-game-select">Select a Game:</label>
-                <select id="manshawdies-game-select" className="game-select" data-team="manshawdies">
-                    <option value="game1">Valorant</option>
-                    <option value="game2">Overwatch 2</option>
-                </select>
-                <div id="manshawdies-stats" className="stats"></div>
-            </div>
+            <Team name="Manshawdies" games={['Valorant', 'Overwatch 2']} />
+            <Team name="Teh's Angels" games={['League of Legends', 'Smite']} />
+            <Team name="Doganators" games={['Forza Horizon', 'Gran Turismo']} />
+            <Team name="Astrofees" games={['Math is Fun', 'Poptropica']} />
 
-            <div className="team">
-                <h2>Teh's Angels</h2>
-                <label htmlFor="tehs-angels-game-select">Select a Game:</label>
-                <select id="tehs-angels-game-select" className="game-select" data-team="tehs-angels">
-                    <option value="game1">League of Legends</option>
-                    <option value="game2">Smite</option>
-                </select>
-                <div id="tehs-angels-stats" className="stats"></div>
-            </div>
-
-            <div className="team">
-                <h2>Doganators</h2>
-                <label htmlFor="doganators-game-select">Select a Game:</label>
-                <select id="doganators-game-select" className="game-select" data-team="doganators">
-                    <option value="game1">Forza Horizon</option>
-                    <option value="game2">Gran Turismo</option>
-                </select>
-                <div id="doganators-stats" className="stats"></div>
-            </div>
-
-            <div className="team">
-                <h2>Astrofees</h2>
-                <label htmlFor="astrofees-game-select">Select a Game:</label>
-                <select id="astrofees-game-select" className="game-select" data-team="astrofees">
-                    <option value="game1">Math is Fun</option>
-                    <option value="game2">Poptropica</option>
-                </select>
-                <div id="astrofees-stats" className="stats"></div>
-            </div>
-
-            {/* Bar graph section */}
-            <div className="bar-graph">
-                <h2>Win vs Loss Rates</h2>
-                <canvas id="player-stats"></canvas>
-            </div>
+            <BarGraph playerNames={playerNames} winRates={winRates} />
 
             <footer className="">
                 <p>&copy; 2024 SDSU ESports Team. All rights reserved.</p>
