@@ -16,13 +16,14 @@ function Footer() {
         <img src={sdsuLogo} alt="eSports Logo" style={{ height: 50 }} />
       </Typography>
       <Box>
+        Stay connected with us!
         <IconButton component="a" href="https://www.instagram.com/aztecgamingsdsu/?img_index=1" target="_blank" color="black">
           <InstagramIcon />
         </IconButton>
         <IconButton component="a" href="https://discord.gg/yourinvitecode" target="_blank" color="black">
           {/* <DiscordIcon /> */}
         </IconButton>
-        <IconButton component="a" href="https://twitch.tv/yourchannelname" target="_blank" color="black">
+        <IconButton component="a" href="https://t.co/QHcCAAOOCY" target="_blank" color="black">
           <SportsEsportsIcon />
         </IconButton>
       </Box>
