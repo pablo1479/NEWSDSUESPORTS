@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,19 +12,37 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-// TODO remove, this demo shouldn't need to reset the theme.
+import axios from 'axios';
+import Alert from '@mui/material/Alert';
 
 const defaultTheme = createTheme();
 
 export default function SignIn() {
+  const [error, setError] = React.useState('');
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    const email = data.get('email');
+    const password = data.get('password');
+
+    // Email validation
+    if (!/\S+@\S+\.\S+/.test(email)) {
+      setError('Please enter a valid email address.');
+      return;
+    }
+
+    // Password validation
+    if (password.length <= 8 || password.toLowerCase() === 'password') {
+      setError('Password must be more than 8 characters long and not be "password".');
+      return;
+    }
+
+    // Reset error state if all validations pass
+    setError('');
+    console.log({ email, password });
+
+    // Add further logic here, such as sending the login request to the server
   };
 
   return (
@@ -46,6 +64,11 @@ export default function SignIn() {
             Sign in
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+            {error && (
+              <Alert severity="error" sx={{ width: '100%', mb: 2 }}>
+                {error}
+              </Alert>
+            )}
             <TextField
               margin="normal"
               required

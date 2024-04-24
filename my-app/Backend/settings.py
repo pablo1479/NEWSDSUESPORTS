@@ -16,7 +16,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework', 
-    'my-app',  
+    'my-app', 
+    'corseheaders',
 ]
 
 MIDDLEWARE = [
@@ -27,7 +28,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corseheaders.middleware.CorsMiddleware'
+
 ]
+
+REST_FRAMEWORK = {'DEFAULT_PERMISSION_CLASSES':['rest_framework.permission.AllowAny']}
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'your_project_name_here.urls'  # <-- Replace 'your_project_name_here' with your project's name
 
@@ -51,12 +58,12 @@ WSGI_APPLICATION = 'your_project_name_here.wsgi.application'  # <-- Replace 'you
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'your_database_name_here',  # <-- Replace 'your_database_name_here' with your database name
-        'USER': 'your_database_user_here',  # <-- Replace 'your_database_user_here' with your database user
-        'PASSWORD': 'your_database_password_here',  # <-- Replace 'your_database_password_here' with your database password
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'Local instance 3306',  # <-- Replace 'your_database_name_here' with your database name
+        'USER': 'root',  # <-- Replace 'your_database_user_here' with your database user
+        'PASSWORD': 'Torterra5$',  # <-- Replace 'your_database_password_here' with your database password
         'HOST': 'localhost',  # If PostgreSQL is running locally
-        'PORT': '5432',  # PostgreSQL default port
+        'PORT': '3306',  # PostgreSQL default port
     }
 }
 
