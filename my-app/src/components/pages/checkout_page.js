@@ -22,13 +22,13 @@ import AutoAwesomeRoundedIcon from '@mui/icons-material/AutoAwesomeRounded';
 import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded';
 import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
 
-import AddressForm from '/Users/brandonreynolds/Documents/GitHub/NEWSDSUESPORTS/my-app/src/components/pages/checkout/AddressForm.js';
-import getCheckoutTheme from '/Users/brandonreynolds/Documents/GitHub/NEWSDSUESPORTS/my-app/src/components/pages/checkout/Checkout.js';
-import Info from '/Users/brandonreynolds/Documents/GitHub/NEWSDSUESPORTS/my-app/src/components/pages/checkout/Info.js';
-import InfoMobile from '/Users/brandonreynolds/Documents/GitHub/NEWSDSUESPORTS/my-app/src/components/pages/checkout/InfoMobile.js';
-import PaymentForm from '/Users/brandonreynolds/Documents/GitHub/NEWSDSUESPORTS/my-app/src/components/pages/checkout/PaymentForm.js';
-import Review from '/Users/brandonreynolds/Documents/GitHub/NEWSDSUESPORTS/my-app/src/components/pages/checkout/Review.js';
-import ToggleColorMode from '/Users/brandonreynolds/Documents/GitHub/NEWSDSUESPORTS/my-app/src/components/pages/checkout/ToggleColorMode.js';
+import AddressForm from './AddressForm.js';
+import getCheckoutTheme from './checkout_page.js';
+import Info from './Info.js';
+import InfoMobile from './InfoMobile.js';
+import PaymentForm from './PaymentForm.js';
+import Review from './Review.js';
+import ToggleColorMode from './ToggleColorMode.js';
 
 function ToggleCustomTheme({ showCustomTheme, toggleCustomTheme }) {
   return (
