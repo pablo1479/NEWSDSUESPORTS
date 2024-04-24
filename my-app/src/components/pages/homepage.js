@@ -92,13 +92,6 @@ function HomePage() {
                 bgcolor: 'background.paper',
                 padding: 2
             }}>
-                <Typography variant="h6" sx={{ fontSize: '1.4rem', fontWeight: 'bold' }}>
-                    Our Hours
-                </Typography>
-                <Typography sx={{ fontSize: '1.2rem' }}>
-                    Mon - Fri: 10 AM - 6 PM<br />
-                    Sat - Sun: Closed
-                </Typography>
             </Box>
         </Box>
     );
