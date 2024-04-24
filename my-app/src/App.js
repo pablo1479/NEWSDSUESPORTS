@@ -11,6 +11,7 @@ import Layout from './components/pages/layout';
 import AboutPage from './components/pages/about';
 import StreamPage from './components/pages/stream';
 import MerchPage from './components/pages/merch';
+import Checkout from './components/pages/checkout';
 // import StatsPage from './components/pages/stats';
 
 
@@ -40,6 +41,7 @@ function App() {
           <Route path="/about" element={<Layout><AboutPage /></Layout>} />
           <Route path="/merch" element={<Layout><MerchPage /></Layout>} /> 
           <Route path="/stream" element={<Layout><StreamPage /></Layout>} />
+          <Route path="/checkout" element={<Layout><Checkout/></Layout>} />
           {/* <Route path="/stats" element={<Layout><StatsPage /></Layout>} /> */}
         </Routes>
       </div>
