@@ -29,6 +29,7 @@ function StreamPage() {
                 {streams.map((stream) => (
                     <Box key={stream} sx={{ width: '100%', height: 0, paddingBottom: '56.25%', position: 'relative' }}>
                         <iframe
+                            title="Live Stream"
                             src={`https://player.twitch.tv/?channel=${stream}&parent=${parentDomain}`}
                             frameBorder="0"
                             allowFullScreen={true}
