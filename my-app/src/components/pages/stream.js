@@ -9,14 +9,16 @@ function StreamPage() {
         "kaicenat",  // Extracted from https://m.twitch.tv/kaicenat/home
         "pokimane",  // Extracted from https://m.twitch.tv/pokimane/home
         "rene8808",  // Extracted from https://m.twitch.tv/rene8808
-        "zilverk"  // Extracted from https://m.twitch.tv/zilverk/home
+        "zilverk",  // Extracted from https://m.twitch.tv/zilverk/home
+        "caseoh_streamingg",
+        "thesketchreal"
     ];
 
     const parentDomain = "localhost"; // Change to your deployed domain when hosting the site
 
     return (
         <Box sx={{ padding: 2 }}>
-            <Typography variant="h4" sx={{ marginBottom: 2, textAlign: 'center' }}>
+            <Typography variant="h4" sx={{ marginBottom: 2, textAlign: 'center', color: '#D41736'}}>
                 Live Twitch Streams
             </Typography>
             <Box sx={{
