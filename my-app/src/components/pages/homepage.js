@@ -46,7 +46,7 @@ function HomePage() {
                 <iframe
                     width="100%"
                     height="315"
-                    src="https://www.youtube.com/embed/2cHbI3GVMsI"
+                    src="https://www.youtube.com/embed/JE_z4tiVJQ8"
                     title="YouTube video player"
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -64,7 +64,7 @@ function HomePage() {
                 <iframe
                     width="100%"
                     height="315"
-                    src="https://www.youtube.com/embed/2cHbI3GVMsI"
+                    src="https://www.youtube.com/embed/BDP9UBOwY_c"
                     title="YouTube video player"
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
