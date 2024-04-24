@@ -10,7 +10,7 @@ import fifa23 from './fifa23.jpeg';
 import supersmashbros from './supersmashbros.jpeg';
 import legendofzelda from './legendofzelda.jpeg';
 import nba2k23 from './nba2k23.jpeg';
-import professorImage from './dogan.jpeg';  // Import the image for Professor Ugur Dogan
+import professorImage from './dogan-modified.jpg';  // Import the image for Professor Ugur Dogan
 
 const gameImages = [
     { src: fifa23, title: "FIFA 23" },
@@ -37,17 +37,18 @@ function AboutPage() {
                 <Grid item xs={12} md={6}>
                     <Box sx={{
                         padding: 2,
-                        border: `2px solid #D41736`, // Use the specific color code for the border
-                        textAlign: 'center', // Centers the text within the box
-                        margin: 'auto', // Centers the box within the grid item
-                        maxWidth: '90%', // Ensures the box doesn't span the entire width for aesthetics
-                        backgroundColor: '#fff' // optional: background color for contrast
+                        border: `4px solid #D41736`, // Thicker border
+                        borderRadius: '12px', // Rounded corners
+                        textAlign: 'center',
+                        margin: 'auto',
+                        maxWidth: '90%',
+                        backgroundColor: '#fff'
                     }}>
                         <Typography variant="h4" sx={{ marginBottom: 2, color: '#D41736' }}>
                             Mission Statement
                         </Typography>
                         <Typography variant="body1">
-                        The Esports Engagement Center, a collaboration among various university divisions, uses esports as a platform for educational and personal growth. Our facility supports learning and well-being through comprehensive programs like care advising, educational workshops, and extensive library services. We are dedicated to fostering both competitive and scholarly esports talents, ensuring our students have the opportunities to thrive.                           </Typography>
+                        The Esports Engagement Center, a collaboration among various university divisions, uses esports as a platform for educational and personal growth. Our facility supports learning and well-being through comprehensive programs like care advising, educational workshops, and extensive library services. We are dedicated to fostering both competitive and scholarly esports talents, ensuring our students have the opportunities to thrive.                        </Typography>
                     </Box>
                     <Box sx={{
                         display: 'flex',
@@ -55,7 +56,8 @@ function AboutPage() {
                         justifyContent: 'center',
                         marginTop: 2,
                         padding: 2,
-                        border: `2px solid #D41736`,
+                        border: `4px solid #D41736`,
+                        borderRadius: '12px',
                         backgroundColor: '#fff'
                     }}>
                         <img src={professorImage} alt="Professor Ugur Dogan" style={{ width: 100, height: 100, marginRight: 2 }} />
@@ -69,9 +71,10 @@ function AboutPage() {
                         Stay up to date with any upcoming events with our Twitter!
                     </Typography>
                     <Box sx={{
-                        height: 400, // Adjust height as needed
+                        height: 400,
                         overflow: 'auto',
-                        textAlign: 'center'
+                        textAlign: 'center',
+                        borderRadius: '12px'  // Consistent rounded corners
                     }}>
                         <a className="twitter-timeline" href="https://twitter.com/aztecgamingsdsu">
                             Tweets by aztecgamingsdsu
@@ -86,8 +89,13 @@ function AboutPage() {
             <Grid container spacing={2}>
                 {gameImages.map((game, index) => (
                     <Grid item xs={12} sm={6} md={3} key={index}>
-                        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                            <img src={game.src} alt={game.title} style={{ width: '100%', height: 'auto' }} />
+                        <Box sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            borderRadius: '12px'  // Rounded corners for images
+                        }}>
+                            <img src={game.src} alt={game.title} style={{ width: '100%', height: 'auto', borderRadius: '12px' }} />
                             <Typography sx={{ mt: 1, color: '#D41736' }}>{game.title}</Typography>
                         </Box>
                     </Grid>
@@ -103,7 +111,8 @@ function AboutPage() {
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    '& .MuiTextField-root': { m: 1, width: '300px' }
+                    '& .MuiTextField-root': { m: 1, width: '300px' },
+                    borderRadius: '12px'  // Rounded corners for form
                 }}
                 noValidate
                 autoComplete="off"
