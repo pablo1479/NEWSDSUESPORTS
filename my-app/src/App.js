@@ -11,7 +11,7 @@ import Layout from './components/pages/layout';
 import AboutPage from './components/pages/about';
 import StreamPage from './components/pages/stream';
 import MerchPage from './components/pages/merch';
-import Checkout from './components/pages/checkout';
+import Checkout from './components/pages/checkout_page';
 // import StatsPage from './components/pages/stats';
 
 
