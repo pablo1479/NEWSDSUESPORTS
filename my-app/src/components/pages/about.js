@@ -11,7 +11,7 @@ import fifa23 from './fifa23.jpeg';
 import supersmashbros from './supersmashbros.jpeg';
 import legendofzelda from './legendofzelda.jpeg';
 import nba2k23 from './nba2k23.jpeg';
-import professorImage from './dogan.jpeg';  // Import the image for Professor Ugur Dogan
+import professorImage from './dogan-modified.jpg';  // Import the image for Professor Ugur Dogan
 
 const gameImages = [
     { src: fifa23, title: "FIFA 23"  },
