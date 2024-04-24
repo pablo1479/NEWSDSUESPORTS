@@ -1,26 +1,101 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { Grid, Typography, Button } from '@mui/material';
+
+// Component for displaying team information
+function Team({ name, games }) {
+    return (
+        <Grid container direction="column" alignItems="center" className="team">
+            <Typography variant="h2">{name}</Typography>
+            {/* Display game selection */}
+            <Typography variant="body1">Games:</Typography>
+            {games.map((game, index) => (
+                <Typography key={index} variant="body2">{game}</Typography>
+            ))}
+            {/* Add some random elements */}
+            <Button variant="contained" color="primary">Join Team</Button>
+        </Grid>
+    );
+}
+
+// Component for displaying the stats
+function Stats({ playerName, winRate }) {
+    return (
+        <Grid container direction="column" alignItems="center" className="stats">
+            <Typography variant="h3">{playerName}</Typography>
+            <Typography variant="body1">Win Rate: {winRate}%</Typography>
+            {/* Add some random elements */}
+            <Button variant="outlined" color="secondary">View Profile</Button>
+        </Grid>
+    );
+}
+
+function App() {
+    // Sample data for the stats
+    const playerStats = [
+        { playerName: 'Alex Rivera', winRate: 70 },
+        { playerName: 'Papa Pookie', winRate: 60 },
+        { playerName: 'Pookie Pablo', winRate: 80 },
+        { playerName: 'Robert McLockedin', winRate: 50 }
+    ];
+
+    return (
+        <div>
+            <header>
+                <Typography variant="h1">SDSU ESports</Typography>
+            </header>
+
+            {/* Display team information */}
+            <Team name="Manshawdies" games={['Valorant', 'Overwatch 2']} />
+            <Team name="Teh's Angels" games={['League of Legends', 'Smite']} />
+            <Team name="Doganators" games={['Forza Horizon', 'Gran Turismo']} />
+            <Team name="Astrofees" games={['Math is Fun', 'Poptropica']} />
+
+            {/* Display stats */}
+            {playerStats.map((player, index) => (
+                <Stats key={index} playerName={player.playerName} winRate={player.winRate} />
+            ))}
+
+            <footer>
+                <Typography>&copy; 2024 SDSU ESports Team. All rights reserved.</Typography>
+            </footer>
+        </div>
+    );
+}
+
+export default App;
+
+
+
+
+
+
+
+/* import React, { useState, useEffect } from 'react';
 import Chart from 'chart.js/auto';
+import { FormControl, InputLabel, Select, MenuItem, Grid, Typography } from '@mui/material';
 
 // Component for displaying team information
 function Team({ name, games }) {
     const [selectedGame, setSelectedGame] = useState('');
 
     return (
-        <div className="team">
-            <h2>{name}</h2>
-            <label htmlFor={`${name.toLowerCase()}-game-select`}>Select a Game:</label>
-            <select
-                id={`${name.toLowerCase()}-game-select`}
-                className="game-select"
-                value={selectedGame}
-                onChange={(e) => setSelectedGame(e.target.value)}
-            >
-                {games.map((game, index) => (
-                    <option key={index} value={game}>{game}</option>
-                ))}
-            </select>
+        <Grid container direction="column" alignItems="center" className="team">
+            <Typography variant="h2">{name}</Typography>
+            <FormControl>
+                <InputLabel id={`${name.toLowerCase()}-game-select-label`}>Select a Game:</InputLabel>
+                <Select
+                    labelId={`${name.toLowerCase()}-game-select-label`}
+                    id={`${name.toLowerCase()}-game-select`}
+                    value={selectedGame}
+                    onChange={(e) => setSelectedGame(e.target.value)}
+                >
+                    {games.map((game, index) => (
+                        <MenuItem key={index} value={game}>{game}</MenuItem>
+                    ))}
+                </Select>
+            </FormControl>
             <div id={`${name.toLowerCase()}-stats`} className="stats"></div>
-        </div>
+        </Grid>
     );
 }
 
@@ -66,10 +141,10 @@ function BarGraph({ playerNames, winRates }) {
     }, [playerNames, winRates]);
 
     return (
-        <div className="bar-graph">
-            <h2>Win vs Loss Rates</h2>
+        <Grid container direction="column" alignItems="center" className="bar-graph">
+            <Typography variant="h2">Win vs Loss Rates</Typography>
             <canvas id="player-stats"></canvas>
-        </div>
+        </Grid>
     );
 }
 
@@ -81,7 +156,7 @@ function App() {
     return (
         <div>
             <header>
-                <h1>SDSU ESports</h1>
+                <Typography variant="h1">SDSU ESports</Typography>
             </header>
 
             <Team name="Manshawdies" games={['Valorant', 'Overwatch 2']} />
@@ -92,10 +167,10 @@ function App() {
             <BarGraph playerNames={playerNames} winRates={winRates} />
 
             <footer className="">
-                <p>&copy; 2024 SDSU ESports Team. All rights reserved.</p>
+                <Typography>&copy; 2024 SDSU ESports Team. All rights reserved.</Typography>
             </footer>
         </div>
     );
 }
 
-export default App;
+export default App; */
