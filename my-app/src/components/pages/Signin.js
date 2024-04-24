@@ -12,12 +12,23 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-// TODO remove, this demo shouldn't need to reset the theme.
+import axios from 'axios'; // Import axios
 
 const defaultTheme = createTheme();
 
 export default function SignIn() {
+  const [details, setDetails] = React.useState({}); // State to hold fetched data
+
+  React.useEffect(() => {
+    axios.get('http://localhost:8080/')
+      .then(res => {
+          setDetails(res.data);
+      })
+      .catch(err => {
+          console.error('Error fetching data:', err);
+      });
+  }, []); // Fetch data when component mounts
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
