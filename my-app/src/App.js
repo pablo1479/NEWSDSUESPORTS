@@ -1,32 +1,55 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import homepage from './components/pages/homepage'; // Make sure to capitalize component names
-
+import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import HomePage from './components/pages/Homepage';
+import SignUp from './components/pages/Signup';
+import Signin from './components/pages/Signin';
+import Layout from './components/pages/layout';
+import AboutPage from './components/pages/about';
+// import StatsPage from './components/pages/stats';
+// Define the main theme using Material-UI's createTheme
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#D41736', // Custom red color
+    },
+    text: {
+      primary: '#333', // Dark grey text
+    },
+  },
+});
+// App component containing the Router and navigation links
 function App() {
+
   return (
     <Router>
       <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/contact">Contact</Link>
-            </li>
-          </ul>
-        </nav>
         <Routes>
-          <Route path="/" element={<homepage />} /> {/* Use `element` prop and self-closing tags */}
-          <Route path="/about" element={<p>About Page</p>} /> {/* Example for About */}
-          <Route path="/contact" element={<p>Contact Page</p>} /> {/* Example for Contact */}
+          <Route path="/" element={<Layout><HomePage /></Layout>} />
+          <Route path="/Signup" element={<Layout><SignUp /></Layout>} />
+          <Route path="/Signin" element={<Layout><Signin /></Layout>} />
+          <Route path="/about" element={<Layout><AboutPage /></Layout>} />
+          {/* <Route path="/merch" element={<MerchPage />} /> */}
+          {/* <Route path="/stream" element={<StreamPage />} /> */}
+          {/* <Route path="/stats" element={<Layout><StatsPage /></Layout>} /> */}
         </Routes>
       </div>
     </Router>
   );
 }
 
-export default App;
+// Main component that wraps the App with the ThemeProvider
+function Main() {
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline /> {/* Normalize CSS for material components */}
+      <App />
+    </ThemeProvider>
+  );
+}
+
+// Render the Main component into the DOM
+ReactDOM.render(<Main />, document.getElementById('root'));
+export default App; // Ensure this line is present to export 'App'
