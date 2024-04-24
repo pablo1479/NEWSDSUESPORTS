@@ -10,6 +10,7 @@ import Signin from './components/pages/Signin';
 import Layout from './components/pages/layout';
 import AboutPage from './components/pages/about';
 import StreamPage from './components/pages/stream';
+import MerchPage from './components/pages/merch';
 // import StatsPage from './components/pages/stats';
 
 
@@ -37,7 +38,7 @@ function App() {
           <Route path="/Signup" element={<Layout><SignUp /></Layout>} />
           <Route path="/Signin" element={<Layout><Signin /></Layout>} />
           <Route path="/about" element={<Layout><AboutPage /></Layout>} />
-          {/* <Route path="/merch" element={<MerchPage />} /> */}
+          <Route path="/merch" element={<Layout><MerchPage /></Layout>} /> 
           <Route path="/stream" element={<Layout><StreamPage /></Layout>} />
           {/* <Route path="/stats" element={<Layout><StatsPage /></Layout>} /> */}
         </Routes>
