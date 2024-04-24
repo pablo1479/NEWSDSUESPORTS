@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import esporthome from './esporthome.jpg'; // Ensure the image path is correct
 
 function HomePage() {
+
+    useEffect(() => {
+      axios.get('http://localhost:8080/')
+      .then(res => {
+          setDetails(res.data);
+      })
+      .catch(err => {
+          console.error('Error fetching data:', err);
+      });
+}, []);
+
     return (
         <Box sx={{ padding: 2, textAlign: 'center' }}>
             {/* Image Section with Overlay Text */}
@@ -91,3 +103,4 @@ function HomePage() {
 }
 
 export default HomePage;
+
