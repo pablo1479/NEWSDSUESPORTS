@@ -12,7 +12,9 @@ import Typography from '@mui/material/Typography';  // Importing Typography
 import MenuItem from '@mui/material/MenuItem';  // Importing MenuItem
 import { useNavigate } from 'react-router-dom';
 
+
 const pages = ['Home', 'About', 'Merch', 'Stream', 'Stats'];
+const pagePaths = ['/', '/about', '/merch', '/stream', '/stats']; // Paths must correspond to pages
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -21,7 +23,10 @@ function ResponsiveAppBar() {
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-
+  const handleNavigate = (path) => {
+    navigate(path);
+    handleCloseNavMenu(); // Close menu upon navigation
+  };
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
@@ -67,30 +72,25 @@ function ResponsiveAppBar() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+{pages.map((page, index) => (
+                <MenuItem key={page} onClick={() => handleNavigate(pagePaths[index])}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
 
-          <Box sx={{ display: { xs: 'flex', md: 'none' }, flexGrow: 1, justifyContent: 'center' }}>
-            <img src={logoImage} alt="Logo" style={{ height: 30 }} />
-          </Box>
-
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+            {pages.map((page, index) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={() => handleNavigate(pagePaths[index])}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}
               </Button>
             ))}
           </Box>
-
           {/* Log In Button */}
           <Box sx={{ flexGrow: 0 }}>
             <Button color="inherit" sx={{ my: 2, display: 'block' }} onClick={handleLogin}>
