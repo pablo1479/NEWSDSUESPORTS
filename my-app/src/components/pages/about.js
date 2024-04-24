@@ -14,7 +14,8 @@ function App() {
                 <p className="mt-3">Welcome to the official website of the San Diego State University ESports Team!</p>
             </main>
             <section id="contact">
-                <h2>Contact Us</h2>
+            
+            <h2>Contact Us</h2>
                 
                 <p>
                     If you have any questions or feedback, 
