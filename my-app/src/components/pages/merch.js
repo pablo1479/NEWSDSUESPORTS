@@ -4,7 +4,7 @@ import { Link} from 'react-router-dom'; // Import Link from react-router-dom
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import merchandiseImage from './aztec_gaming_banner.jpg'; // Ensure the image path is correct
-
+import tehimage from './TehsAngels.jpg';
 function MerchPage() {
     // Placeholder merchandise items
     const [searchTerm, setSearchTerm] = useState('');
@@ -15,7 +15,7 @@ function MerchPage() {
 
     const merchandiseItems = [
         { id: 1, name: "Manshawdie's Pants", description: "Pants representing Team Manshawdies", price: 19.99, size: "M", quantity: 10, image: "item1.jpg" },
-        { id: 2, name: "Teh's Angels T-Shirt", description: "T-shirt showcasing with Team Teh's Angels", price: 29.99, size: "L", quantity: 5, image: "TehsAngels.jpg" },
+        { id: 2, name: "Teh's Angels T-Shirt", description: "T-shirt showcasing with Team Teh's Angels", price: 29.99, size: "L", quantity: 5, image: "tehimage" },
         { id: 3, name: "Doganators Hat", description: "Hat presenting Team Doganators", price: 24.99, size: "S", quantity: 20, image: "item3.jpg" },
         // Add more items as needed USING DATABASE MYSQL
     ];
@@ -147,22 +147,22 @@ function MerchPage() {
             </Box>
 
             {/* Cart Section */}
-            <Box sx={{ marginTop: 2 }}>
-                <Typography variant="h6" sx={{ fontSize: '1.4rem', fontWeight: 'bold' }}>
+            <Box sx={{ marginTop: 2, bgcolor: 'black'}}>
+                <Typography variant="h6" sx={{ fontSize: '1.4rem', fontWeight: 'bold'}}>
                     Cart
                 </Typography>
                 <ul>
                     {cart.map((item, index) => (
-                        <li key={index}>
+                        <div key={index}>
                             {index+1}. {item.name}:  ${item.price.toFixed(2)}
-                        </li>
+                        </div>
                     ))}
-                        <li>Total: ${cartTotal.toFixed(2)}</li>
-                        <li>
+                        <div>Total: ${cartTotal.toFixed(2)}</div>
+                        <div>
                             <Link to="/checkout">
                                 <button>Checkout</button>
                             </Link>
-                        </li>
+                        </div>
                 </ul>
             </Box>
         </Box>
