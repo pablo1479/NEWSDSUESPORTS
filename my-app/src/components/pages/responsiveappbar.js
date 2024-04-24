@@ -93,7 +93,24 @@ function ResponsiveAppBar() {
           </Box>
           {/* Log In Button */}
           <Box sx={{ flexGrow: 0 }}>
-            <Button color="inherit" sx={{ my: 2, display: 'block' }} onClick={handleLogin}>
+            <Button
+              variant="contained" // Makes the button filled with color
+              color="primary" // Use the primary theme color or specify a custom color
+              sx={{
+      my: 2,
+      display: 'block',
+      backgroundColor: '#white', // Custom red color or choose another striking color
+      '&:hover': {
+        backgroundColor: '#bf1230' // Darker shade on hover
+      },
+      boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)', // Optional shadow for depth
+      py: 1.5, // Increase padding for a larger button
+      px: 3,
+      fontWeight: 'bold', // Make font bold
+      fontSize: '1rem' // Increase font size
+    }}
+              onClick={handleLogin}
+            >
               Sign up / Log in
             </Button>
           </Box>
