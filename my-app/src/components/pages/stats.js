@@ -1,103 +1,88 @@
-// import React from 'react';
-// import Chart from 'chart.js/auto';
+import React, { useState, useEffect, useRef } from 'react';
+import { Grid, Typography, Button, TextField } from '@mui/material';
+import Chart from 'chart.js/auto';
 
-// function StatsPage() {
-//     // Sample data for the bar graph
-//     const playerNames = ['Alex Rivera', 'Papa Pookie', 'Pookie Pablo', 'Robert McLockedin'];
-//     const winRates = [0.7, 0.6, 0.8, 0.5]; // Assuming win rates are between 0 and 1
+function Stats({ playerName, game }) {
+    const [wins, setWins] = useState(0);
+    const [losses, setLosses] = useState(0);
+    const [winLossRatio, setWinLossRatio] = useState(0);
+    const chartRef = useRef(null);
 
-//     // Creating the bar graph using Chart.js
-//     React.useEffect(() => {
-//         const ctx = document.getElementById('player-stats');
-//         const myChart = new Chart(ctx, {
-//             type: 'bar',
-//             data: {
-//                 labels: playerNames,
-//                 datasets: [{
-//                     label: 'Win vs Loss Rates',
-//                     data: winRates,
-//                     backgroundColor: [
-//                         'rgba(255, 99, 132, 0.2)',
-//                         'rgba(54, 162, 235, 0.2)',
-//                         'rgba(255, 206, 86, 0.2)',
-//                         'rgba(75, 192, 192, 0.2)'
-//                     ],
-//                     borderColor: [
-//                         'rgba(255, 99, 132, 1)',
-//                         'rgba(54, 162, 235, 1)',
-//                         'rgba(255, 206, 86, 1)',
-//                         'rgba(75, 192, 192, 1)'
-//                     ],
-//                     borderWidth: 1
-//                 }]
-//             },
-//             options: {
-//                 scales: {
-//                     y: {
-//                         beginAtZero: true
-//                     }
-//                 }
-//             }
-//         });
-//     }, []);
+    const handleWinsChange = (event) => {
+        setWins(Number(event.target.value));
+    };
 
-//     return (
-//         <div>
-//             <header>
-//                 <h1>SDSU ESports</h1>
-//             </header>
+    const handleLossesChange = (event) => {
+        setLosses(Number(event.target.value));
+    };
 
-//             <div className="team">
-//                 <h2>Manshawdies</h2>
-//                 <label htmlFor="manshawdies-game-select">Select a Game:</label>
-//                 <select id="manshawdies-game-select" className="game-select" data-team="manshawdies">
-//                     <option value="game1">Valorant</option>
-//                     <option value="game2">Overwatch 2</option>
-//                 </select>
-//                 <div id="manshawdies-stats" className="stats"></div>
-//             </div>
+    useEffect(() => {
+        // Calculate win-loss ratio
+        const ratio = wins / (wins + losses);
+        setWinLossRatio(isNaN(ratio) ? 0 : ratio);
 
-//             <div className="team">
-//                 <h2>Teh's Angels</h2>
-//                 <label htmlFor="tehs-angels-game-select">Select a Game:</label>
-//                 <select id="tehs-angels-game-select" className="game-select" data-team="tehs-angels">
-//                     <option value="game1">League of Legends</option>
-//                     <option value="game2">Smite</option>
-//                 </select>
-//                 <div id="tehs-angels-stats" className="stats"></div>
-//             </div>
+        // Update chart
+        if (chartRef.current) {
+            const ctx = chartRef.current.getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Wins', 'Losses'],
+                    datasets: [{
+                        label: 'Win vs Loss Ratio',
+                        data: [wins, losses],
+                        backgroundColor: [
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 99, 132, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 99, 132, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+    }, [wins, losses]);
 
-//             <div className="team">
-//                 <h2>Doganators</h2>
-//                 <label htmlFor="doganators-game-select">Select a Game:</label>
-//                 <select id="doganators-game-select" className="game-select" data-team="doganators">
-//                     <option value="game1">Forza Horizon</option>
-//                     <option value="game2">Gran Turismo</option>
-//                 </select>
-//                 <div id="doganators-stats" className="stats"></div>
-//             </div>
+    return (
+        <Grid container direction="column" alignItems="center" className="stats">
+            <Typography variant="h3">{playerName}</Typography>
+            <Typography variant="body1">Game: {game}</Typography>
+            {/* Input fields for wins and losses */}
+            <TextField
+                type="number"
+                label="Wins"
+                value={wins}
+                onChange={handleWinsChange}
+                variant="outlined"
+                style={{ marginBottom: '16px' }}
+            />
+            <TextField
+                type="number"
+                label="Losses"
+                value={losses}
+                onChange={handleLossesChange}
+                variant="outlined"
+                style={{ marginBottom: '16px' }}
+            />
+            {/* Canvas for the chart */}
+            <canvas ref={chartRef} width="400" height="200"></canvas>
+            {/* Display win-loss ratio */}
+            <Typography variant="body1">Win vs Loss Ratio: {winLossRatio.toFixed(2)}</Typography>
+            {/* Add some random elements */}
+            <Button variant="outlined" color="secondary">View Profile</Button>
+        </Grid>
+    );
+}
 
-//             <div className="team">
-//                 <h2>Astrofees</h2>
-//                 <label htmlFor="astrofees-game-select">Select a Game:</label>
-//                 <select id="astrofees-game-select" className="game-select" data-team="astrofees">
-//                     <option value="game1">Math is Fun</option>
-//                     <option value="game2">Poptropica</option>
-//                 </select>
-//                 <div id="astrofees-stats" className="stats"></div>
-//             </div>
+export default Stats;
 
-//             {/* Bar graph section */}
-//             <div className="bar-graph">
-//                 <h2>Win vs Loss Rates</h2>
-//                 <canvas id="player-stats"></canvas>
-//             </div>
-
-//             <footer className="">
-//                 <p>&copy; 2024 SDSU ESports Team. All rights reserved.</p>
-//             </footer>
-//         </div>
-//     );
-// }
-
-// export default StatsPage;
