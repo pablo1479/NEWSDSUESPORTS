@@ -4,14 +4,16 @@ import Typography from '@mui/material/Typography';
 
 function StreamPage() {
     const streams = [
+        "aztecgamingsdsu",
+        "caseoh_streamingg",
         "caseoh_", // Already existing streamer
         "jynxzi",  // Extracted from https://m.twitch.tv/jynxzi/home
         "kaicenat",  // Extracted from https://m.twitch.tv/kaicenat/home
         "pokimane",  // Extracted from https://m.twitch.tv/pokimane/home
         "rene8808",  // Extracted from https://m.twitch.tv/rene8808
         "zilverk",  // Extracted from https://m.twitch.tv/zilverk/home
-        "caseoh_streamingg",
-        "thesketchreal"
+        
+        
     ];
 
     const parentDomain = "localhost"; // Change to your deployed domain when hosting the site

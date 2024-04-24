@@ -5,22 +5,24 @@ import Typography from '@mui/material/Typography';
 import esporthome from './esporthome.jpg'; // Ensure the image path is correct
 
 function HomePage() {
+    // Define state to hold details fetched from the server
+    const [setDetails] = useState(null);
 
     useEffect(() => {
-      axios.get('http://localhost:8080/')
-      .then(res => {
-          setDetails(res.data);
-      })
-      .catch(err => {
-          console.error('Error fetching data:', err);
-      });
-}, []);
+        axios.get('http://localhost:8080/')
+        .then(res => {
+            setDetails(res.data);
+        })
+        .catch(err => {
+            console.error('Error fetching data:', err);
+        });
+    }, []);
 
     return (
         <Box sx={{ padding: 2, textAlign: 'center' }}>
             {/* Image Section with Overlay Text */}
             <Box sx={{
-                position: 'relative', // Needed for absolute positioning of the Typography within
+                position: 'relative',
                 width: '100%',
                 overflow: 'hidden'
             }}>
@@ -35,8 +37,8 @@ function HomePage() {
                     flexDirection: 'column',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    color: '#FFFFFF', // Adjusted to white for better visibility
-                    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Adds a dark overlay for better readability
+                    color: '#FFFFFF',
+                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
                     padding: '1rem'
                 }}>
                     <Typography variant="h2" sx={{ fontSize: '3rem', fontWeight: 'bold', marginBottom: 1 }}>
@@ -53,7 +55,7 @@ function HomePage() {
                 display: 'grid',
                 gridTemplateColumns: 'repeat(3, 1fr)',
                 gap: 2,
-                marginTop: 3 // Added margin-top for spacing between image and videos
+                marginTop: 3
             }}>
                 <iframe
                     width="100%"
@@ -103,4 +105,3 @@ function HomePage() {
 }
 
 export default HomePage;
-

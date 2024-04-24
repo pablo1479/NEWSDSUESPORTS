@@ -20,12 +20,14 @@ function Footer() {
         <IconButton component="a" href="https://www.instagram.com/aztecgamingsdsu/?img_index=1" target="_blank" color="black">
           <InstagramIcon />
         </IconButton>
-        <IconButton component="a" href="https://discord.gg/yourinvitecode" target="_blank" color="black">
+        <IconButton component="a" href="https://discord.gg/SjtybMqvu9" target="_blank" color="black">
           {/* <DiscordIcon /> */}
         </IconButton>
         <IconButton component="a" href="https://t.co/QHcCAAOOCY" target="_blank" color="black">
           <SportsEsportsIcon />
         </IconButton>
+        Mon - Fri: 10 AM - 6 PM<br />
+              Sat - Sun: Closed
       </Box>
       <Typography variant="body2" color="text.secondary" align="center">
    {'Copyright © '}
