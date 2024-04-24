@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
@@ -13,13 +14,25 @@ import nba2k23 from './nba2k23.jpeg';
 import professorImage from './dogan-modified.jpg';  // Import the image for Professor Ugur Dogan
 
 const gameImages = [
-    { src: fifa23, title: "FIFA 23" },
+    { src: fifa23, title: "FIFA 23"  },
     { src: supersmashbros, title: "Super Smash Bros" },
     { src: legendofzelda, title: "Legend of Zelda" },
     { src: nba2k23, title: "NBA 2K23" }
 ];
 
 function AboutPage() {
+    const [details, setDetails] = useState([]);
+
+    useEffect(() => {
+        axios.get('http://localhost:8080')
+            .then(res => {
+                setDetails(res.data);
+            })
+            .catch(err => {
+                console.error('Error fetching data:', err);
+            });
+    }, []);
+
     // Load Twitter script dynamically
     useEffect(() => {
         const script = document.createElement('script');
@@ -136,3 +149,4 @@ function AboutPage() {
 }
 
 export default AboutPage;
+
