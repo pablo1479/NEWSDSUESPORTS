@@ -4,6 +4,14 @@ import Typography from '@mui/material/Typography';
 import merchandiseImage from './aztec_gaming_banner.jpg'; // Ensure the image path is correct
 
 function MerchPage() {
+    // Placeholder merchandise items
+    const merchandiseItems = [
+        { name: "Item 1", price: 19.99, image: "item1.jpg" },
+        { name: "Item 2", price: 29.99, image: "item2.jpg" },
+        { name: "Item 3", price: 24.99, image: "item3.jpg" },
+        // Add more items as needed USING DATABASE MYSQL
+    ];
+
     return (
         <Box sx={{ padding: 2, textAlign: 'center' }}>
             {/* Image Section with Overlay Text */}
@@ -12,7 +20,7 @@ function MerchPage() {
                 width: '100%',
                 overflow: 'hidden'
             }}>
-                { <img src={merchandiseImage} alt="Merchandise" style={{ width: '50%', height: 'auto' }} />}
+                <img src={merchandiseImage} alt="Merchandise" style={{ width: '50%', height: 'auto' }} />
                 <Box sx={{
                     position: 'absolute',
                     top: 0,
@@ -23,7 +31,7 @@ function MerchPage() {
                     flexDirection: 'column',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    color: '#000000', // Adjusted to white for better visibility
+                    color: '#FFFFFF',
                     backgroundColor: 'rgba(0, 0, 0, 0.5)', // Adds a dark overlay for better readability
                     padding: '1rem'
                 }}>
@@ -43,18 +51,17 @@ function MerchPage() {
                 gap: 2,
                 marginTop: 3 // Added margin-top for spacing between image and merchandise items
             }}>
-                {/* Insert merchandise items here */}
-                {/* Example:
-                <div>
-                    <img src={itemImage} alt="Item" style={{ width: '100%', height: 'auto' }} />
-                    <Typography variant="body1" sx={{ fontSize: '1rem', fontWeight: 'bold', marginTop: 1 }}>
-                        Item Name
-                    </Typography>
-                    <Typography variant="body2" sx={{ fontSize: '0.8rem' }}>
-                        $XX.XX
-                    </Typography>
-                </div>
-                */}
+                {merchandiseItems.map((item, index) => (
+                    <div key={index}>
+                        <img src={item.image} alt={item.name} style={{ width: '100%', height: 'auto' }} />
+                        <Typography variant="body1" sx={{ fontSize: '1rem', fontWeight: 'bold', marginTop: 1 }}>
+                            {item.name}
+                        </Typography>
+                        <Typography variant="body2" sx={{ fontSize: '0.8rem' }}>
+                            ${item.price.toFixed(2)}
+                        </Typography>
+                    </div>
+                ))}
             </Box>
 
             {/* Filters and Sorting Options */}
@@ -67,6 +74,25 @@ function MerchPage() {
                     Filter & Sort
                 </Typography>
                 {/* Insert filter and sorting options here */}
+                {/* Example filter options */}
+                <Box>
+                    <Typography variant="subtitle1" sx={{ fontWeight: 'bold', marginTop: 1 }}>
+                        Price Range
+                    </Typography>
+                    {/* Add input sliders for price range */}
+                    <input type="range" min="0" max="100" defaultValue="0" />
+                    <input type="range" min="0" max="100" defaultValue="100" />
+                </Box>
+                {/* Example sorting options */}
+                <Box sx={{ marginTop: 2 }}>
+                    <Typography variant="subtitle1" sx={{ fontWeight: 'bold', marginTop: 1 }}>
+                        Sort by
+                    </Typography>
+                    <select>
+                        <option value="name">Name</option>
+                        <option value="price">Price</option>
+                    </select>
+                </Box>
             </Box>
         </Box>
     );
