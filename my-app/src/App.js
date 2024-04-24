@@ -1,15 +1,21 @@
+import axios from 'axios'
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import HomePage from './components/pages/Homepage';
+import HomePage from './components/pages/homepage';
 import SignUp from './components/pages/Signup';
 import Signin from './components/pages/Signin';
 import Layout from './components/pages/layout';
 import AboutPage from './components/pages/about';
-import { Stats, Team, Apps } from './components/pages/stats';
+import StreamPage from './components/pages/stream';
+// import StatsPage from './components/pages/stats';
+
+
 // Define the main theme using Material-UI's createTheme
+
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -31,7 +37,9 @@ function App() {
           <Route path="/Signup" element={<Layout><SignUp /></Layout>} />
           <Route path="/Signin" element={<Layout><Signin /></Layout>} />
           <Route path="/about" element={<Layout><AboutPage /></Layout>} />
-          <Route path="/stats" element={<Layout><Stats/><Team/><Apps/></Layout>} />
+          {/* <Route path="/merch" element={<MerchPage />} /> */}
+          <Route path="/stream" element={<Layout><StreamPage /></Layout>} />
+          {/* <Route path="/stats" element={<Layout><StatsPage /></Layout>} /> */}
         </Routes>
       </div>
     </Router>
@@ -42,7 +50,7 @@ function App() {
 function Main() {
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline /> 
+      <CssBaseline /> {/* Normalize CSS for material components */}
       <App />
     </ThemeProvider>
   );
