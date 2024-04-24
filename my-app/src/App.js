@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import HomePage from './components/pages/Homepage';
+import HomePage from './components/pages/homepage';
 import SignUp from './components/pages/Signup';
 import Signin from './components/pages/Signin';
 import Layout from './components/pages/layout';
