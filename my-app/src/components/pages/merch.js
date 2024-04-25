@@ -87,48 +87,58 @@ const filteredItems = merchandiseItems.map(item => {
     return (
         <Box sx={{ padding: 2, textAlign: 'center' }}>
             {/* Image Section with Overlay Text */}
-            <Box sx={{
-                position: 'relative', // Needed for absolute positioning of the Typography within
+            {/* Image Section with Overlay Text */}
+            <Box
+            sx={{
+                position: 'relative',
                 width: '100%',
-                overflow: 'hidden'
-            }}>
-                <img src={merchandiseImage} alt="Merchandise" style={{ width: '50%', height: 'auto' }} />
-                <Box sx={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    color: '#FFFFFF',
-                    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Adds a dark overlay for better readability
-                    padding: '1rem'
-                }}>
-                    <Typography variant="h2" sx={{ fontSize: '3rem', fontWeight: 'bold', marginBottom: 1 }}>
-                        Welcome to the Merchandise Page!
-                    </Typography>
-                    <Typography variant="h4" sx={{ fontSize: '2rem', fontWeight: 'bold' }}>
-                        Explore our collection of merchandise. Check out our latest products!
-                    </Typography>
-                </Box>
+                overflow: 'hidden',
+                backgroundColor: '#000', // Set background color to black
+                color: '#FFF', // Set text color to white
+            }}
+            >
+            <img src={merchandiseImage} alt="Merchandise" style={{ width: '50%', height: 'auto' }} />
+            <Box
+                sx={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                textAlign: 'center',
+                padding: '2rem',
+                background: 'rgba(0, 0, 0, 0.5)', // Semi-transparent black overlay
+                }}
+            >
+                <Typography variant="h2" sx={{ fontSize: '3rem', fontWeight: 'bold', marginBottom: 1 }}>
+                Welcome to the Merchandise Page!
+                </Typography>
+                <Typography variant="h4" sx={{ fontSize: '2rem', fontWeight: 'bold' }}>
+                Explore our collection of merchandise. Check out our latest products!
+                </Typography>
+            </Box>
             </Box>
 
-            {/* Search Bar */}
+
             <Box sx={{ marginTop: 2 }}>
-                <Typography variant="h6" sx={{ fontSize: '3rem', fontWeight: 'bold', marginBottom: 1 }}>
-                    Seach by name
-                </Typography>
-                <input
-                    type="text"
-                    placeholder="Search..."
-                    value={searchTerm}
-                    onChange={handleSearchChange}
-                    style={{ width: '100%', padding: '0.5rem', fontSize: '1rem' }}
-                />
-            </Box>
+    <Typography variant="h6" sx={{ fontSize: '1.4rem', fontWeight: 'bold', marginBottom: 1 }}>
+        Search by Name
+    </Typography>
+    <input
+        type="text"
+        placeholder="Search..."
+        value={searchTerm}
+        onChange={handleSearchChange}
+        style={{
+            width: '100%',
+            padding: '0.5rem',
+            fontSize: '1rem',
+            border: '1px solid #ccc',
+            borderRadius: '4px',
+            boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.1)'
+        }}
+    />
+</Box>
+
 
             {/* Filters and Sorting Options */}
             <Box sx={{
@@ -145,7 +155,7 @@ const filteredItems = merchandiseItems.map(item => {
                         Price Range
                     </Typography>
                     <input type="range" min="0" max="100" name="min" value={priceRange.min} onChange={handlePriceChange} />
-                    <input type="range" min="0" max="100" name="max" value={priceRange.max} onChange={handlePriceChange} />
+                    <input type="range" min="100" max="1000" name="max" value={priceRange.max} onChange={handlePriceChange} />
                     <Typography variant="body2" sx={{ fontSize: '0.8rem' }}>
                         ${priceRange.min} - ${priceRange.max} {/* Display the current range values */}
                     </Typography>
@@ -175,12 +185,14 @@ const filteredItems = merchandiseItems.map(item => {
             </Box>
 
             {/* Merchandise Items */}
-            <Box sx={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(3, 1fr)',
-                gap: 2,
-                marginTop: 3 // Added margin-top for spacing between image and merchandise items
-            }}>
+            <Box
+                sx={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(3, 1fr)',
+                    gap: 2,
+                    marginTop: 3 // Added margin-top for spacing between image and merchandise items
+                }}
+            >
                 {filteredItems.map((item, index) => (
                     <div key={index}>
                         <img src={item.image} alt={item.name} style={{ width: '100%', height: 'auto' }} />
@@ -194,33 +206,35 @@ const filteredItems = merchandiseItems.map(item => {
                             ${item.price.toFixed(2)}
                         </Typography>
                         <Typography variant="body2" sx={{ fontSize: '0.8rem' }}>
-                           Quantity Left: {item.quantity}
+                        Quantity Left: {item.quantity}
                         </Typography>
-                        <button onClick={() => addToCart(item.id)}>Add to Cart</button>
+                        <button style={{ padding: '0.5rem 1rem', backgroundColor: '#007bff', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }} onClick={() => addToCart(item.id)}>Add to Cart</button>
                     </div>
                 ))}
             </Box>
 
 
+
             {/* Cart Section */}
-            <Box sx={{ marginTop: 2}}>
-                <Typography variant="h6" sx={{ fontSize: '1.4rem', fontWeight: 'bold'}}>
+            <Box sx={{ marginTop: 2, padding: 2, backgroundColor: '#f0f0f0' }}> {/* Add padding and background color */}
+                <Typography variant="h6" sx={{ fontSize: '1.4rem', fontWeight: 'bold', marginBottom: 1, color: '#333' }}> {/* Adjust typography and color */}
                     Cart
                 </Typography>
-                <ul>
+                <ul style={{ listStyleType: 'none', padding: 0 }}> {/* Remove default list styles and padding */}
                     {cart.map((item, index) => (
-                        <div key={index}>
-                            {index+1}. {item.name}:  ${item.price.toFixed(2)}
-                        </div>
+                        <li key={index} style={{ marginBottom: '0.5rem' }}> {/* Add margin bottom for spacing */}
+                            {index + 1}. {item.name}: ${item.price.toFixed(2)}
+                        </li>
                     ))}
-                        <div>Total: ${cartTotal.toFixed(2)}</div>
-                        <div>
-                            <Link to="/checkout">
-                                <button>Checkout</button>    {/* <button onClick={handleCheckout}>Checkout</button> */}
-                            </Link>
-                        </div>
+                    <li style={{ marginTop: '1rem' }}>Total: ${cartTotal.toFixed(2)}</li> {/* Add margin top for spacing */}
+                    <li>
+                        <Link to="/checkout">
+                            <button style={{ padding: '0.5rem 1rem', marginTop: '1rem', backgroundColor: '#007bff', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Checkout</button> {/* Style the button */}
+                        </Link>
+                    </li>
                 </ul>
             </Box>
+
         </Box>
     );
 }
