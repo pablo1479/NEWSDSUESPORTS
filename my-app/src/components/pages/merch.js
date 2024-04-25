@@ -4,7 +4,16 @@ import { Link} from 'react-router-dom'; // Import Link from react-router-dom
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import merchandiseImage from './aztec_gaming_banner.jpg'; // Ensure the image path is correct
-import tehimage from './TehsAngels.jpg';
+import tehimage from './TehsAngels.jpeg';
+import manshirt from './pants.jpeg.webp';
+import doganhat from './DoganatorsHat.jpg';
+import underwearRed from './underwear.png.webp';
+import slippersMi from './bunnyslippers.jpg';
+import sunglassesBlack from './sunglassesP.webp';
+import pookiebear from './pookieshirt.png.jpeg';
+import trackSweater from './track.jpg.avif';
+import keychainEx from './keychain.jpeg';
+
 function MerchPage() {
     // Placeholder merchandise items
     const [searchTerm, setSearchTerm] = useState('');
@@ -13,21 +22,40 @@ function MerchPage() {
     const [cart, setCart] = useState([]);
     // const history = useHistory(); // Initialize useHistory
 
-    const merchandiseItems = [
-        { id: 1, name: "Manshawdie's Pants", description: "Pants representing Team Manshawdies", price: 19.99, size: "M", quantity: 10, image: "item1.jpg" },
-        { id: 2, name: "Teh's Angels T-Shirt", description: "T-shirt showcasing with Team Teh's Angels", price: 29.99, size: "L", quantity: 5, image: "tehimage" },
-        { id: 3, name: "Doganators Hat", description: "Hat presenting Team Doganators", price: 24.99, size: "S", quantity: 20, image: "item3.jpg" },
-        // Add more items as needed USING DATABASE MYSQL
-    ];
+const merchandiseItems = [
+    { id: 1, name: "Manshawdie's Pants", description: "Pants representing Team Manshawdies", price: 19.99, size: "M", quantity: 10, image: manshirt },
+    { id: 2, name: "Teh's Angels T-Shirt", description: "T-shirt showcasing with Team Teh's Angels", price: 29.99, size: "L", quantity: 5, image: tehimage },
+    { id: 3, name: "Doganators Hat", description: "Hat presenting Team Doganators", price: 24.99, size: "S", quantity: 20, image: doganhat },
+    { id: 4, name: "Alexatron KeyChains", description: "Keychain displaying Team Alexatron", price: 18.99, size: "M", quantity: 2, image: keychainEx },
+    { id: 5, name: "COMPE DREAM TEAM underwear", description: "Briefs with COMPE DREAM TEAM", price: 90.99, size: "L", quantity: 3, image: underwearRed },
+    { id: 6, name: "Mi Mi Slippers", description: "Team Mi Mi slippers", price: 21.99, size: "S", quantity: 4, image: slippersMi },
+    { id: 7, name: "Pabloaties Sunglasses", description: "Team Pabloaties sunglasses", price: 30.99, size: "M", quantity: 7, image: sunglassesBlack },
+    { id: 8, name: "Pookie Puffs T-Shirt", description: "Team Pookie Puffs T-shirt", price: 10.99, size: "S", quantity: 20, image: pookiebear },
+    { id: 9, name: "RobbieTrack Sweater", description: "Team RobbieTrack Sweater", price: 35.99, size: "M", quantity: 10, image: trackSweater },
+    // Add more items as needed USING DATABASE MYSQL
+];
 
-    const filteredItems = merchandiseItems.filter(item => {
-        return (
-            item.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-            item.price >= priceRange.min &&
-            item.price <= priceRange.max
-            // Add additional filters here as needed
-        );
-    });
+const filteredItems = merchandiseItems.map(item => {
+    const quantityInCart = cart.reduce((total, cartItem) => {
+        if (cartItem.id === item.id) {
+            return total + 1;
+        }
+        return total;
+    }, 0);
+    return {
+        ...item,
+        quantityLeft: item.quantity - quantityInCart
+    };
+}).filter(item => {
+    return (
+        item.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+        item.price >= priceRange.min &&
+        item.price <= priceRange.max &&
+        (filterOptions.size ? item.size === filterOptions.size : true) && // Apply size filter if selected
+        (filterOptions.quantity ? item.quantityLeft >= filterOptions.quantity : true) // Apply quantity filter if selected
+    );
+});
+
 
     const handleSearchChange = (event) => {
         setSearchTerm(event.target.value);
@@ -90,6 +118,9 @@ function MerchPage() {
 
             {/* Search Bar */}
             <Box sx={{ marginTop: 2 }}>
+                <Typography variant="h6" sx={{ fontSize: '3rem', fontWeight: 'bold', marginBottom: 1 }}>
+                    Seach by name
+                </Typography>
                 <input
                     type="text"
                     placeholder="Search..."
@@ -97,6 +128,50 @@ function MerchPage() {
                     onChange={handleSearchChange}
                     style={{ width: '100%', padding: '0.5rem', fontSize: '1rem' }}
                 />
+            </Box>
+
+            {/* Filters and Sorting Options */}
+            <Box sx={{
+                marginTop: 2,
+                bgcolor: 'background.paper',
+                padding: 2
+            }}>
+                <Typography variant="h6" sx={{ fontSize: '1.4rem', fontWeight: 'bold' }}>
+                    Filter & Sort
+                </Typography>
+                {/* Filter by Price */}
+                <Box>
+                    <Typography variant="subtitle1" sx={{ fontWeight: 'bold', marginTop: 1 }}>
+                        Price Range
+                    </Typography>
+                    <input type="range" min="0" max="100" name="min" value={priceRange.min} onChange={handlePriceChange} />
+                    <input type="range" min="0" max="100" name="max" value={priceRange.max} onChange={handlePriceChange} />
+                    <Typography variant="body2" sx={{ fontSize: '0.8rem' }}>
+                        ${priceRange.min} - ${priceRange.max} {/* Display the current range values */}
+                    </Typography>
+                </Box>
+                {/* Filter by Size */}
+                <Box>
+                    <Typography variant="subtitle1" sx={{ fontWeight: 'bold', marginTop: 1 }}>
+                        Size
+                    </Typography>
+                    <select value={filterOptions.size || ''} onChange={(e) => setFilterOptions({...filterOptions, size: e.target.value})}>
+                        <option value="">All Sizes</option>
+                        <option value="XS">Extra Small</option>
+                        <option value="S">Small</option>
+                        <option value="M">Medium</option>
+                        <option value="L">Large</option>
+                        <option value="XL">Extra Large</option>
+                        {/* Add more size options as needed */}
+                    </select>
+                </Box>
+                {/* Filter by Quantity */}
+                <Box>
+                    <Typography variant="subtitle1" sx={{ fontWeight: 'bold', marginTop: 1 }}>
+                        Quantity (At least)
+                    </Typography>
+                    <input type="number" min="0" name="quantity" value={filterOptions.quantity || ''} onChange={(e) => setFilterOptions({...filterOptions, quantity: e.target.value})} />
+                </Box>
             </Box>
 
             {/* Merchandise Items */}
@@ -126,28 +201,9 @@ function MerchPage() {
                 ))}
             </Box>
 
-            {/* Filters and Sorting Options */}
-            <Box sx={{
-                marginTop: 2,
-                bgcolor: 'background.paper',
-                padding: 2
-            }}>
-                <Typography variant="h6" sx={{ fontSize: '1.4rem', fontWeight: 'bold' }}>
-                    Filter & Sort
-                </Typography>
-                {/* Filter by Price */}
-                <Box>
-                    <Typography variant="subtitle1" sx={{ fontWeight: 'bold', marginTop: 1 }}>
-                        Price Range
-                    </Typography>
-                    <input type="range" min="0" max="100" name="min" value={priceRange.min} onChange={handlePriceChange} />
-                    <input type="range" min="0" max="100" name="max" value={priceRange.max} onChange={handlePriceChange} />
-                </Box>
-                {/* Add more filter options here */}
-            </Box>
 
             {/* Cart Section */}
-            <Box sx={{ marginTop: 2, bgcolor: 'black'}}>
+            <Box sx={{ marginTop: 2}}>
                 <Typography variant="h6" sx={{ fontSize: '1.4rem', fontWeight: 'bold'}}>
                     Cart
                 </Typography>
@@ -160,7 +216,7 @@ function MerchPage() {
                         <div>Total: ${cartTotal.toFixed(2)}</div>
                         <div>
                             <Link to="/checkout">
-                                <button>Checkout</button>
+                                <button>Checkout</button>    {/* <button onClick={handleCheckout}>Checkout</button> */}
                             </Link>
                         </div>
                 </ul>
