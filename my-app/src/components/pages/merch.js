@@ -4,24 +4,34 @@ import { Link} from 'react-router-dom'; // Import Link from react-router-dom
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import merchandiseImage from './aztec_gaming_banner.jpg'; // Ensure the image path is correct
+import tehimage from './TehsAngels.jpeg';
+import manshirt from './pants.jpeg.webp';
+import doganhat from './DoganatorsHat.jpg';
+import underwearRed from './underwear.png.webp';
+import slippersMi from './bunnyslippers.jpg';
+import sunglassesBlack from './sunglassesP.webp';
+import pookiebear from './pookieshirt.png.jpeg';
+import trackSweater from './track.jpg.avif';
+import keychainEx from './keychain.jpeg';
+
 function MerchPage() {
     // Placeholder merchandise items
-const [searchTerm, setSearchTerm] = useState('');
-const [priceRange, setPriceRange] = useState({ min: 0, max: 100 });
-const [filterOptions, setFilterOptions] = useState({});
-const [cart, setCart] = useState([]);
-// const history = useHistory(); // Initialize useHistory
+    const [searchTerm, setSearchTerm] = useState('');
+    const [priceRange, setPriceRange] = useState({ min: 0, max: 100 });
+    const [filterOptions, setFilterOptions] = useState({});
+    const [cart, setCart] = useState([]);
+    // const history = useHistory(); // Initialize useHistory
 
 const merchandiseItems = [
-    { id: 1, name: "Manshawdie's Pants", description: "Pants representing Team Manshawdies", price: 19.99, size: "M", quantity: 10, image: "item1.jpg" },
-    { id: 2, name: "Teh's Angels T-Shirt", description: "T-shirt showcasing with Team Teh's Angels", price: 29.99, size: "L", quantity: 5, image: "./TehsAngels.jpg" },
-    { id: 3, name: "Doganators Hat", description: "Hat presenting Team Doganators", price: 24.99, size: "S", quantity: 20, image: "item3.jpg" },
-    { id: 4, name: "Alexatron KeyChains", description: "Keychain displaying Team Alexatron", price: 18.99, size: "M", quantity: 2, image: "item3.jpg" },
-    { id: 5, name: "COMPE DREAM TEAM underwear", description: "Briefs with COMPE DREAM TEAM", price: 90.99, size: "L", quantity: 3, image: "item3.jpg" },
-    { id: 6, name: "Mi Mi Slippers", description: "Team Mi Mi slippers", price: 21.99, size: "S", quantity: 4, image: "item3.jpg" },
-    { id: 7, name: "Pabloaties Sunglasses", description: "Team Pabloaties sunglasses", price: 30.99, size: "M", quantity: 7, image: "item3.jpg" },
-    { id: 8, name: "Pookie Puffs T-Shirt", description: "Team Pookie Puffs T-shirt", price: 10.99, size: "S", quantity: 20, image: "item3.jpg" },
-    { id: 9, name: "RobbieTrack Sweater", description: "Team RobbieTrack Sweater", price: 35.99, size: "M", quantity: 10, image: "item3.jpg" },
+    { id: 1, name: "Manshawdie's Pants", description: "Pants representing Team Manshawdies", price: 19.99, size: "M", quantity: 10, image: manshirt },
+    { id: 2, name: "Teh's Angels T-Shirt", description: "T-shirt showcasing with Team Teh's Angels", price: 29.99, size: "L", quantity: 5, image: tehimage },
+    { id: 3, name: "Doganators Hat", description: "Hat presenting Team Doganators", price: 24.99, size: "S", quantity: 20, image: doganhat },
+    { id: 4, name: "Alexatron KeyChains", description: "Keychain displaying Team Alexatron", price: 18.99, size: "M", quantity: 2, image: keychainEx },
+    { id: 5, name: "COMPE DREAM TEAM underwear", description: "Briefs with COMPE DREAM TEAM", price: 90.99, size: "L", quantity: 3, image: underwearRed },
+    { id: 6, name: "Mi Mi Slippers", description: "Team Mi Mi slippers", price: 21.99, size: "S", quantity: 4, image: slippersMi },
+    { id: 7, name: "Pabloaties Sunglasses", description: "Team Pabloaties sunglasses", price: 30.99, size: "M", quantity: 7, image: sunglassesBlack },
+    { id: 8, name: "Pookie Puffs T-Shirt", description: "Team Pookie Puffs T-shirt", price: 10.99, size: "S", quantity: 20, image: pookiebear },
+    { id: 9, name: "RobbieTrack Sweater", description: "Team RobbieTrack Sweater", price: 35.99, size: "M", quantity: 10, image: trackSweater },
     // Add more items as needed USING DATABASE MYSQL
 ];
 
