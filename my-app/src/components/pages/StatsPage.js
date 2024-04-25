@@ -1,20 +1,37 @@
 import React, { useState } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { Table, TableHead, TableBody, TableRow, TableCell, TableContainer, Paper, FormControl, Select, MenuItem } from '@mui/material';
+import { 
+  PieChart, 
+  Pie, 
+  Tooltip, 
+  Legend, 
+  Cell 
+} from 'recharts';
+import { 
+  Table, 
+  TableHead, 
+  TableBody, 
+  TableRow, 
+  TableCell, 
+  TableContainer, 
+  Paper, 
+  FormControl, 
+  Select, 
+  MenuItem,
+  TextField,
+  Button,
+  Autocomplete
+} from '@mui/material';
 
-// Function to generate random game names
 const generateRandomGames = () => {
   const games = ['Fortnite', 'COD', 'Overwatch', 'League of Legends', 'Apex Legends', 'FIFA', 'Rocket League', 'Valorant', 'Counter-Strike'];
   const randomIndex1 = Math.floor(Math.random() * games.length);
   let randomIndex2 = Math.floor(Math.random() * games.length);
-  // Make sure the second game is different from the first one
   while (randomIndex2 === randomIndex1) {
     randomIndex2 = Math.floor(Math.random() * games.length);
   }
-  return [games[randomIndex1] + "     " + games[randomIndex2]];
+  return [`${games[randomIndex1]}     ${games[randomIndex2]}`];
 };
 
-// Mock data with added games and changed column headers
 const playerStats = [
   { playerName: 'Manshawdies', wins: 10, draws: 5, losses: 8, games: generateRandomGames() },
   { playerName: 'Doganators', wins: 8, draws: 3, losses: 12, games: generateRandomGames() },
@@ -23,85 +40,92 @@ const playerStats = [
 ];
 
 const StatsPage = () => {
-  const [sortBy, setSortBy] = useState('wins'); // State for sorting
-  const [sortOrder, setSortOrder] = useState('desc'); // State for sort order
-  const [selectedStat, setSelectedStat] = useState('wins'); // State for selected statistic
+  const [sortBy, setSortBy] = useState('wins');
+  const [sortOrder, setSortOrder] = useState('desc');
+  const [selectedStat, setSelectedStat] = useState('wins');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchedPlayer, setSearchedPlayer] = useState(null);
 
-  // Function to handle sorting
   const handleSort = (criteria) => {
     if (criteria === sortBy) {
-      // Toggle sort order if sorting by the same criteria
       setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
     } else {
-      // Set new sort criteria
       setSortBy(criteria);
       setSortOrder('desc');
     }
   };
 
-  // Function to handle changing selected statistic
   const handleStatChange = (event) => {
     setSelectedStat(event.target.value);
   };
 
-  // Function to sort players based on criteria and order
-  const sortedPlayers = [...playerStats].sort((a, b) => {
-    const multiplier = sortOrder === 'desc' ? -1 : 1;
-    return multiplier * (a[sortBy] - b[sortBy]);
-  });
+  const handleSearch = () => {
+    if (!searchTerm.trim()) {
+      alert('Please enter a team name.');
+      return;
+    }
+    const player = playerStats.find(player => player.playerName.toLowerCase() === searchTerm.toLowerCase());
+    setSearchedPlayer(player);
+  };
 
-  // Get table column headers dynamically based on the first player's keys
-  const tableHeaders = Object.keys(playerStats[0]);
+  const handleInputChange = (event, value) => {
+    setSearchTerm(value);
+  };
+
+  const handleClear = () => {
+    setSearchTerm('');
+    setSearchedPlayer(null);
+  };
+
+  const filteredOptions = playerStats.map(player => player.playerName);
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', width: '100%' }}>
-      <div style={{ width: '80%' }}>
-        {/* Placeholder for Material-UI AppBar */}
-        <h2>Statistics Page</h2>
-        {/* Placeholder for Material-UI Bar Chart */}
-        <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={playerStats}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="playerName" />
-            <YAxis />
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', minHeight: '100vh', width: '100%' }}>
+      <h1>Team Statistics</h1>
+      <Autocomplete
+        value={searchTerm}
+        onChange={handleInputChange}
+        options={filteredOptions}
+        renderInput={(params) => <TextField {...params} label="Search Team" variant="outlined" style={{ width: 300 }} />}
+      />
+      <Button variant="contained" onClick={handleSearch}>Search</Button>
+      {searchedPlayer ? (
+        <div style={{ marginBottom: '20px' }}>
+          <h3>{searchedPlayer.playerName} Statistics</h3>
+          <p>Wins: {searchedPlayer.wins}</p>
+          <p>Draws: {searchedPlayer.draws}</p>
+          <p>Losses: {searchedPlayer.losses}</p>
+        </div>
+      ) : searchTerm ? (
+        <p>No such team found in the database.</p>
+      ) : null}
+      {searchedPlayer && (
+        <div>
+          <h3>Win Ratio</h3>
+          <PieChart width={400} height={400}>
+            <Pie
+              data={[
+                { name: 'Wins', value: searchedPlayer.wins },
+                { name: 'Draws', value: searchedPlayer.draws },
+                { name: 'Losses', value: searchedPlayer.losses }
+              ]}
+              dataKey="value"
+              nameKey="name"
+              cx="50%"
+              cy="50%"
+              outerRadius={100}
+              fill="#8884d8"
+              label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+            >
+              {['#0088FE', '#00C49F', '#FFBB28'].map((color, index) => (
+                <Cell key={`cell-${index}`} fill={color} />
+              ))}
+            </Pie>
             <Tooltip />
             <Legend />
-            <Bar dataKey={selectedStat} fill="#8884d8" name={selectedStat === 'wins' ? 'Wins' : selectedStat === 'draws' ? 'Draws' : 'Losses'} />
-          </BarChart>
-        </ResponsiveContainer>
-        {/* Placeholder for Material-UI Player Stats Table */}
-        <h3>Player Statistics</h3>
-        <TableContainer component={Paper} style={{ marginTop: '20px' }}>
-          <FormControl style={{ marginBottom: '20px' }}>
-            <Select value={selectedStat} onChange={handleStatChange}>
-              <MenuItem value="wins">Wins</MenuItem>
-              <MenuItem value="draws">Draws</MenuItem>
-              <MenuItem value="losses">Losses</MenuItem>
-            </Select>
-          </FormControl>
-          <Table sx={{ minWidth: 650 }} aria-label="player statistics">
-            <TableHead>
-              <TableRow>
-                {tableHeaders.map((header, index) => (
-                  <TableCell key={index} onClick={() => handleSort(header)} sx={{ cursor: 'pointer', backgroundColor: sortBy === header ? '#ddd' : 'transparent', fontWeight: 'bold', borderBottom: '1px solid rgba(224, 224, 224, 1)' }}>
-                    {header === 'wins' ? 'Wins' : header === 'draws' ? 'Draws' : header === 'losses' ? 'Losses' : header}
-                    {sortBy === header && (sortOrder === 'asc' ? ' ▲' : ' ▼')}
-                  </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {sortedPlayers.map((player, index) => (
-                <TableRow key={index}>
-                  {tableHeaders.map((header, index) => (
-                    <TableCell key={index}>{player[header]}</TableCell>
-                  ))}
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </div>
+          </PieChart>
+        </div>
+      )}
     </div>
   );
 };
