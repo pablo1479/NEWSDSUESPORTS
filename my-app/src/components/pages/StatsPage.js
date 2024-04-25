@@ -1,78 +1,107 @@
-// StatsPage.js
-
 import React, { useState } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { 
+  PieChart, 
+  Pie, 
+  Tooltip, 
+  Legend, 
+  Cell 
+} from 'recharts';
+import { 
+  TextField,
+  Button,
+  Autocomplete
+} from '@mui/material';
 
-// Mock data
+const generateRandomGames = () => {
+  const games = ['Fortnite', 'COD', 'Overwatch', 'League of Legends', 'Apex Legends', 'FIFA', 'Rocket League', 'Valorant', 'Counter-Strike'];
+  const randomIndex1 = Math.floor(Math.random() * games.length);
+  let randomIndex2 = Math.floor(Math.random() * games.length);
+  while (randomIndex2 === randomIndex1) {
+    randomIndex2 = Math.floor(Math.random() * games.length);
+  }
+  return [`${games[randomIndex1]}     ${games[randomIndex2]}`];
+};
+
 const playerStats = [
-  { playerName: 'Manshawdies', kills: 10, deaths: 5, assists: 8, damageDealt: 5000 },
-  { playerName: 'Doganators', kills: 8, deaths: 3, assists: 12, damageDealt: 4500 },
-  { playerName: 'Tehs Angels', kills: 15, deaths: 7, assists: 5, damageDealt: 6000 },
-  { playerName: 'Astrofees', kills: 12, deaths: 6, assists: 10, damageDealt: 5500 },
+  { playerName: 'Manshawdies', wins: 10, draws: 5, losses: 8, games: generateRandomGames() },
+  { playerName: 'Doganators', wins: 8, draws: 3, losses: 12, games: generateRandomGames() },
+  { playerName: 'Tehs Angels', wins: 15, draws: 7, losses: 5, games: generateRandomGames() },
+  { playerName: 'Astrofees', wins: 12, draws: 6, losses: 10, games: generateRandomGames() },
 ];
 
 const StatsPage = () => {
-  const [sortBy, setSortBy] = useState('kills'); // State for sorting
-  const [sortOrder, setSortOrder] = useState('desc'); // State for sort order
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchedPlayer, setSearchedPlayer] = useState(null);
 
-  // Function to handle sorting
-  const handleSort = (criteria) => {
-    if (criteria === sortBy) {
-      // Toggle sort order if sorting by the same criteria
-      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
-    } else {
-      // Set new sort criteria
-      setSortBy(criteria);
-      setSortOrder('desc');
+  const handleSearch = () => {
+    if (!searchTerm.trim()) {
+      alert('Please enter a team name.');
+      return;
     }
+    const player = playerStats.find(player => player.playerName.toLowerCase() === searchTerm.toLowerCase());
+    setSearchedPlayer(player);
   };
 
-  // Function to sort players based on criteria and order
-  const sortedPlayers = [...playerStats].sort((a, b) => {
-    const multiplier = sortOrder === 'desc' ? -1 : 1;
-    return multiplier * (a[sortBy] - b[sortBy]);
-  });
+  const handleInputChange = (event, value) => {
+    setSearchTerm(value);
+  };
+
+  const filteredOptions = playerStats.map(player => player.playerName);
 
   return (
-    <div>
-      <h2>Statistics Page</h2>
-      {/* Bar Chart */}
-      <ResponsiveContainer width="100%" height={300}>
-        <BarChart data={playerStats}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="playerName" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="kills" fill="#8884d8" name="Kills" />
-          <Bar dataKey="deaths" fill="#82ca9d" name="Deaths" />
-          <Bar dataKey="assists" fill="#ffc658" name="Assists" />
-        </BarChart>
-      </ResponsiveContainer>
-      {/* Player Stats Table */}
-      <h3>Player Statistics</h3>
-      <table>
-        <thead>
-          <tr>
-            <th onClick={() => handleSort('playerName')}>Player Name</th>
-            <th onClick={() => handleSort('kills')}>Kills</th>
-            <th onClick={() => handleSort('deaths')}>Deaths</th>
-            <th onClick={() => handleSort('assists')}>Assists</th>
-            <th onClick={() => handleSort('damageDealt')}>Damage Dealt</th>
-          </tr>
-        </thead>
-        <tbody>
-          {sortedPlayers.map((player, index) => (
-            <tr key={index}>
-              <td>{player.playerName}</td>
-              <td>{player.kills}</td>
-              <td>{player.deaths}</td>
-              <td>{player.assists}</td>
-              <td>{player.damageDealt}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div style={{ 
+      display: 'flex', 
+      flexDirection: 'column', 
+      alignItems: 'center', 
+      minHeight: '100vh', 
+      padding: '20px', 
+      backgroundColor: '#f0f0f0' 
+    }}>
+      <h1 style={{ marginBottom: '20px' }}>Team Statistics</h1>
+      <Autocomplete
+        value={searchTerm}
+        onChange={handleInputChange}
+        options={filteredOptions}
+        renderInput={(params) => <TextField {...params} label="Search Team" variant="outlined" style={{ marginBottom: '20px', width: '300px' }} />}
+      />
+      <Button variant="contained" onClick={handleSearch} style={{ marginBottom: '20px' }}>Search</Button>
+      {searchedPlayer ? (
+        <div style={{ marginBottom: '20px' }}>
+          <h3>{searchedPlayer.playerName} Statistics</h3>
+          <p>Wins: {searchedPlayer.wins}</p>
+          <p>Draws: {searchedPlayer.draws}</p>
+          <p>Losses: {searchedPlayer.losses}</p>
+        </div>
+      ) : searchTerm ? (
+        <p style={{ marginBottom: '20px', color: 'red' }}>No such team found in the database.</p>
+      ) : null}
+      {searchedPlayer && (
+        <div style={{ marginBottom: '20px' }}>
+          <h3>Win Ratio</h3>
+          <PieChart width={400} height={400}>
+            <Pie
+              data={[
+                { name: 'Wins', value: searchedPlayer.wins },
+                { name: 'Draws', value: searchedPlayer.draws },
+                { name: 'Losses', value: searchedPlayer.losses }
+              ]}
+              dataKey="value"
+              nameKey="name"
+              cx="50%"
+              cy="50%"
+              outerRadius={100}
+              fill="#8884d8"
+              label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+            >
+              {['#0088FE', '#00C49F', '#FFBB28'].map((color, index) => (
+                <Cell key={`cell-${index}`} fill={color} />
+              ))}
+            </Pie>
+            <Tooltip />
+            <Legend />
+          </PieChart>
+        </div>
+      )}
     </div>
   );
 };
