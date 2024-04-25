@@ -1,24 +1,17 @@
 import React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
+import {
+  Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link,
+  Grid, Box, Typography, Container, Alert
+} from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import axios from 'axios';
-import Alert from '@mui/material/Alert';
+import { useNavigate } from 'react-router-dom';
 
 const defaultTheme = createTheme();
 
 export default function SignIn() {
   const [error, setError] = React.useState('');
+  const navigate = useNavigate();  // Add this line
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -40,9 +33,10 @@ export default function SignIn() {
 
     // Reset error state if all validations pass
     setError('');
-    console.log({ email, password });
 
-    // Add further logic here, such as sending the login request to the server
+    // Simulate login logic (usually you would send a request to your server here)
+    // Assuming login is successful, navigate to the profile page
+    navigate('/profile');  // Change '/profile' to your actual profile route
   };
 
   return (
@@ -108,7 +102,7 @@ export default function SignIn() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/Signup" variant="body2">
+                <Link href="/signup" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
