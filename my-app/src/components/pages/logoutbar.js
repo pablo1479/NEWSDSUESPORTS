@@ -31,10 +31,13 @@ function ResponsiveAppBar() {
     }
   };
 
-  const handleLogin = () => {
-    navigate('/Signup');
+  const handleLogout = () => {
+    // Add your logout logic here, e.g., clearing user session/token
+    console.log("User logged out");
+    navigate('/'); // Navigate to homepage or login page after logout
   };
 
+  // Define handleCloseDialog here
   const handleCloseDialog = () => {
     setOpenDialog(false);
   };
@@ -102,41 +105,34 @@ function ResponsiveAppBar() {
             ))}
           </Box>
 
-          {/* Log In Button */}
           <Box sx={{ flexGrow: 0 }}>
-            
-            
-          <Button
-  variant="contained"
-  color="primary" // Ensure this uses the primary theme color
-  sx={{
-    my: 2,
-    display: 'block',
-    backgroundColor: 'primary.main', // Set this to use your theme's primary color
-    '&:hover': {
-      backgroundColor: '#bf1230' // Ensure this is a visible contrast or adjust as needed
-    },
-    boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)', // Optional shadow for depth
-    py: 1.5, // Increase padding for a larger button
-    px: 3,
-    fontWeight: 'bold', // Make font bold
-    fontSize: '1rem' // Increase font size
-  }}
-  onClick={handleLogin}
->
-  Sign up / Log in
-</Button>            
-            
-            
-            
+            <Button
+              variant="contained"
+              color="primary"
+              sx={{
+                my: 2,
+                display: 'block',
+                backgroundColor: 'primary.main',
+                '&:hover': {
+                  backgroundColor: '#bf1230'
+                },
+                boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)',
+                py: 1.5,
+                px: 3,
+                fontWeight: 'bold',
+                fontSize: '1rem'
+              }}
+              onClick={handleLogout}
+            >
+              Log Out
+            </Button>
           </Box>
         </Toolbar>
       </Container>
 
-      {/* Dialog for Homepage Alert */}
       <Dialog
         open={openDialog}
-        onClose={handleCloseDialog}
+        onClose={handleCloseDialog}  // Usage of handleCloseDialog
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
@@ -147,7 +143,7 @@ function ResponsiveAppBar() {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseDialog} color="primary" autoFocus>
+          <Button onClick={handleCloseDialog} color="primary" autoFocus>  // Usage of handleCloseDialog
             Okay
           </Button>
         </DialogActions>
