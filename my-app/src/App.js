@@ -12,8 +12,9 @@ import AboutPage from './components/pages/about';
 import StreamPage from './components/pages/stream';
 import MerchPage from './components/pages/merch';
 import Checkout from './components/pages/checkout_page';
+ 
 import ProfilePage from './components/pages/profilepage';
-// import StatsPage from './components/pages/stats';
+import StatsPage from './components/pages/StatsPage';
 
 
 // Define the main theme using Material-UI's createTheme
@@ -45,7 +46,8 @@ function App() {
           <Route path="/checkout" element={<Layout><Checkout/></Layout>} />
           <Route path="/profile" element={<ProfilePage/>} />
 
-          {/* <Route path="/stats" element={<Layout><StatsPage /></Layout>} /> */}
+
+          <Route path="/stats" element={<Layout><StatsPage /></Layout>} />
         </Routes>
       </div>
     </Router>
