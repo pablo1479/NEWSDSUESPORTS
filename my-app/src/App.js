@@ -43,7 +43,7 @@ function App() {
           <Route path="/about" element={<Layout><AboutPage /></Layout>} />
           <Route path="/merch" element={<Layout><MerchPage /></Layout>} /> 
           <Route path="/stream" element={<Layout><StreamPage /></Layout>} />
-          <Route path="/checkout" element={<Layout><Checkout/></Layout>} />
+          <Route path="/checkout_page" element={<Layout><Checkout/></Layout>} />
           <Route path="/profile" element={<ProfilePage/>} />
 
 
