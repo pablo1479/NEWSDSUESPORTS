@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import RegisterAPIView, LoginAPIView, LogoutAPIView, MerchandiseListCreateAPIView, StreamListAPIView
+from my-app.views import RegisterAPIView, LoginAPIView, LogoutAPIView, MerchandiseListCreateAPIView, StreamListAPIView
 
 urlpatterns = [
     path('api/register/', RegisterAPIView.as_view(), name='register'),
