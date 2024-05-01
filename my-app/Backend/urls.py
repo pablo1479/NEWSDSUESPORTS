@@ -1,3 +1,4 @@
+# urls.py
 from django.urls import path
 from my-app.views import RegisterAPIView, LoginAPIView, LogoutAPIView, MerchandiseListCreateAPIView, StreamListAPIView
 
