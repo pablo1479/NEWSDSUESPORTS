@@ -120,24 +120,24 @@ const filteredItems = merchandiseItems.map(item => {
 
 
             <Box sx={{ marginTop: 2 }}>
-    <Typography variant="h6" sx={{ fontSize: '1.4rem', fontWeight: 'bold', marginBottom: 1 }}>
-        Search by Name
-    </Typography>
-    <input
-        type="text"
-        placeholder="Search..."
-        value={searchTerm}
-        onChange={handleSearchChange}
-        style={{
-            width: '100%',
-            padding: '0.5rem',
-            fontSize: '1rem',
-            border: '1px solid #ccc',
-            borderRadius: '4px',
-            boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.1)'
-        }}
-    />
-</Box>
+                <Typography variant="h6" sx={{ fontSize: '1.4rem', fontWeight: 'bold', marginBottom: 1 }}>
+                    Search by Name
+                </Typography>
+                <input
+                    type="text"
+                    placeholder="Search..."
+                    value={searchTerm}
+                    onChange={handleSearchChange}
+                    style={{
+                        width: '100%',
+                        padding: '0.5rem',
+                        fontSize: '1rem',
+                        border: '1px solid #ccc',
+                        borderRadius: '4px',
+                        boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.1)'
+                    }}
+                />
+            </Box>
 
 
             {/* Filters and Sorting Options */}
