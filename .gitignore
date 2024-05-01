@@ -1,0 +1,26 @@
+# Ignore all log files
+*.log
+
+# Ignore node_modules directory in Node.js projects
+node_modules/
+.cache/
+
+# Ignore the build output directory
+dist/
+build/
+
+# Ignore temporary files
+tmp/
+temp/
+
+# Ignore IDE and editor directories
+.idea/
+.vscode/
+*.sublime-workspace
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db
+
+# Ignore environment files
+.env
