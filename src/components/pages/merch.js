@@ -190,28 +190,34 @@ const filteredItems = merchandiseItems.map(item => {
                     display: 'grid',
                     gridTemplateColumns: 'repeat(3, 1fr)',
                     gap: 2,
-                    marginTop: 3 // Added margin-top for spacing between image and merchandise items
+                    marginTop: 3, // Added margin-top for spacing between image and merchandise items
                 }}
             >
                 {filteredItems.map((item, index) => (
-                    <div key={index}>
-                        <img src={item.image} alt={item.name} style={{ width: '100%', height: 'auto' }} />
-                        <Typography variant="body1" sx={{ fontSize: '1rem', fontWeight: 'bold', marginTop: 1 }}>
-                            {item.name}
-                        </Typography>
-                        <Typography variant="body2" sx={{ fontSize: '0.8rem' }}>
-                            {item.description}
-                        </Typography>
-                        <Typography variant="body2" sx={{ fontSize: '0.8rem' }}>
-                            ${item.price.toFixed(2)}
-                        </Typography>
-                        <Typography variant="body2" sx={{ fontSize: '0.8rem' }}>
-                        Quantity Left: {item.quantity}
-                        </Typography>
-                        <button style={{ padding: '0.5rem 1rem', backgroundColor: '#007bff', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }} onClick={() => addToCart(item.id)}>Add to Cart</button>
+                    <div key={index} style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+                        <div style={{ flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                            <img src={item.image} alt={item.name} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
+                            <div style={{ padding: '1rem' }}>
+                                <Typography variant="body1" sx={{ fontSize: '1rem', fontWeight: 'bold' }}>
+                                    {item.name}
+                                </Typography>
+                                <Typography variant="body2" sx={{ fontSize: '0.8rem' }}>
+                                    {item.description}
+                                </Typography>
+                                <Typography variant="body2" sx={{ fontSize: '0.8rem' }}>
+                                    ${item.price.toFixed(2)}
+                                </Typography>
+                                <Typography variant="body2" sx={{ fontSize: '0.8rem' }}>
+                                    Quantity Left: {item.quantity}
+                                </Typography>
+                                <button style={{ marginTop: '0.5rem', padding: '0.5rem 1rem', backgroundColor: '#007bff', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }} onClick={() => addToCart(item.id)}>Add to Cart</button>
+                            </div>
+                        </div>
                     </div>
                 ))}
             </Box>
+
+
 
 
 
