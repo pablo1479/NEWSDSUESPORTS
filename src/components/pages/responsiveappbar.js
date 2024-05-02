@@ -134,7 +134,7 @@ function ResponsiveAppBar() {
       </Container>
 
       {/* Dialog for Homepage Alert */}
-      <Dialog
+      {/* <Dialog
         open={openDialog}
         onClose={handleCloseDialog}
         aria-labelledby="alert-dialog-title"
@@ -151,7 +151,7 @@ function ResponsiveAppBar() {
             Okay
           </Button>
         </DialogActions>
-      </Dialog>
+      </Dialog> */}
     </AppBar>
   );
 }

@@ -19,21 +19,34 @@ function MerchPage() {
     const [searchTerm, setSearchTerm] = useState('');
     const [priceRange, setPriceRange] = useState({ min: 0, max: 100 });
     const [filterOptions, setFilterOptions] = useState({});
-    const [cart, setCart] = useState([]);
+    // const [cart, setCart] = useState([]);
     // const history = useHistory(); // Initialize useHistory
 
-const merchandiseItems = [
-    { id: 1, name: "Manshawdie's Pants", description: "Pants representing Team Manshawdies", price: 19.99, size: "M", quantity: 10, image: manshirt },
-    { id: 2, name: "Teh's Angels T-Shirt", description: "T-shirt showcasing with Team Teh's Angels", price: 29.99, size: "L", quantity: 5, image: tehimage },
-    { id: 3, name: "Doganators Hat", description: "Hat presenting Team Doganators", price: 24.99, size: "S", quantity: 20, image: doganhat },
-    { id: 4, name: "Alexatron KeyChains", description: "Keychain displaying Team Alexatron", price: 18.99, size: "M", quantity: 2, image: keychainEx },
-    { id: 5, name: "COMPE DREAM TEAM underwear", description: "Briefs with COMPE DREAM TEAM", price: 90.99, size: "L", quantity: 3, image: underwearRed },
-    { id: 6, name: "Mi Mi Slippers", description: "Team Mi Mi slippers", price: 21.99, size: "S", quantity: 4, image: slippersMi },
-    { id: 7, name: "Pabloaties Sunglasses", description: "Team Pabloaties sunglasses", price: 30.99, size: "M", quantity: 7, image: sunglassesBlack },
-    { id: 8, name: "Pookie Puffs T-Shirt", description: "Team Pookie Puffs T-shirt", price: 10.99, size: "S", quantity: 20, image: pookiebear },
-    { id: 9, name: "RobbieTrack Sweater", description: "Team RobbieTrack Sweater", price: 35.99, size: "M", quantity: 10, image: trackSweater },
-    // Add more items as needed USING DATABASE MYSQL
-];
+    const initialItems = [
+        { id: 1, name: "Manshawdie's Pants", description: "Pants representing Team Manshawdies", price: 19.99, size: "M", quantity: 10, image: manshirt },
+        { id: 2, name: "Teh's Angels T-Shirt", description: "T-shirt showcasing with Team Teh's Angels", price: 29.99, size: "L", quantity: 5, image: tehimage },
+        { id: 3, name: "Doganators Hat", description: "Hat presenting Team Doganators", price: 24.99, size: "S", quantity: 20, image: doganhat },
+        { id: 4, name: "Alexatron KeyChains", description: "Keychain displaying Team Alexatron", price: 18.99, size: "M", quantity: 2, image: keychainEx },
+        { id: 5, name: "COMPE DREAM TEAM underwear", description: "Briefs with COMPE DREAM TEAM", price: 90.99, size: "L", quantity: 3, image: underwearRed },
+        { id: 6, name: "Mi Mi Slippers", description: "Team Mi Mi slippers", price: 21.99, size: "S", quantity: 4, image: slippersMi },
+        { id: 7, name: "Pabloaties Sunglasses", description: "Team Pabloaties sunglasses", price: 30.99, size: "M", quantity: 7, image: sunglassesBlack },
+        { id: 8, name: "Pookie Puffs T-Shirt", description: "Team Pookie Puffs T-shirt", price: 10.99, size: "S", quantity: 20, image: pookiebear },
+        { id: 9, name: "RobbieTrack Sweater", description: "Team RobbieTrack Sweater", price: 35.99, size: "M", quantity: 10, image: trackSweater },
+        // Add more items as needed USING DATABASE MYSQL
+    ];
+    const [merchandiseItems, setMerchandiseItems] = useState(initialItems);
+    const [cart, setCart] = useState([]);
+
+    const addToCart = (itemId) => {
+        const itemIndex = merchandiseItems.findIndex(item => item.id === itemId);
+        let newItems = [...merchandiseItems];
+        if (newItems[itemIndex].quantity > 0) {
+            newItems[itemIndex].quantity -= 1;
+            setMerchandiseItems(newItems);
+            setCart([...cart, newItems[itemIndex]]);
+        }
+    };
+
 
 const filteredItems = merchandiseItems.map(item => {
     const quantityInCart = cart.reduce((total, cartItem) => {
@@ -66,12 +79,12 @@ const filteredItems = merchandiseItems.map(item => {
         setPriceRange({ ...priceRange, [name]: parseFloat(value) });
     };
 
-    const addToCart = (itemId) => {
-        const itemToAdd = merchandiseItems.find(item => item.id === itemId);
-        if (itemToAdd) {
-            setCart([...cart, itemToAdd]);
-        }
-    };
+    // const addToCart = (itemId) => {
+    //     const itemToAdd = merchandiseItems.find(item => item.id === itemId);
+    //     if (itemToAdd) {
+    //         setCart([...cart, itemToAdd]);
+    //     }
+    // };
 
     // Calculate total price of items in the cart
     const cartTotal = cart.reduce((total, item) => total + item.price, 0);
