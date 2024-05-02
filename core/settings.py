@@ -82,12 +82,12 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Local instance 3306',
-        'USER': 'root',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'Merch_P',
+        'USER': 'postgres',
         'PASSWORD': 'Torterra5$',
         'HOST': 'localhost',   # Or the IP address where your MySQL server is hosted
-        'PORT': '3306',        # Default MySQL port
+        'PORT': '5432',        # Default MySQL port
     }
 }
 
