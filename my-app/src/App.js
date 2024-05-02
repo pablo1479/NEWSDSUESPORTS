@@ -78,7 +78,7 @@ function App() {
             padding: '1rem',
           }}
         >
-          This is a {theme.palette.mode} mode theme with custom palette
+
         </div>
       </Router>
     </ThemeProvider>

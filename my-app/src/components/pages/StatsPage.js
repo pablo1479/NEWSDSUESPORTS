@@ -12,6 +12,23 @@ import {
   Autocomplete
 } from '@mui/material';
 
+const generateRandomGames = () => {
+  const games = ['Fortnite', 'COD', 'Overwatch', 'League of Legends', 'Apex Legends', 'FIFA', 'Rocket League', 'Valorant', 'Counter-Strike'];
+  const randomIndex1 = Math.floor(Math.random() * games.length);
+  let randomIndex2 = Math.floor(Math.random() * games.length);
+  while (randomIndex2 === randomIndex1) {
+    randomIndex2 = Math.floor(Math.random() * games.length);
+  }
+  return [`${games[randomIndex1]}     ${games[randomIndex2]}`];
+};
+
+const playerStats = [
+  { playerName: 'Manshawdies', wins: 10, draws: 5, losses: 8, games: generateRandomGames() },
+  { playerName: 'Doganators', wins: 8, draws: 3, losses: 12, games: generateRandomGames() },
+  { playerName: 'Tehs Angels', wins: 15, draws: 7, losses: 5, games: generateRandomGames() },
+  { playerName: 'Astrofees', wins: 12, draws: 6, losses: 10, games: generateRandomGames() },
+];
+
 const StatsPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchedPlayer, setSearchedPlayer] = useState(null);
@@ -21,38 +38,15 @@ const StatsPage = () => {
       alert('Please enter a team name.');
       return;
     }
-
-    fetch(`/playerstats/search/?search_term=${encodeURIComponent(searchTerm)}`)
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error('Player not found');
-        }
-      })
-      .then(data => {
-        if (data.error) {
-          alert(data.error); // Show error message if player not found
-          setSearchedPlayer(null);
-        } else {
-          setSearchedPlayer(data);
-        }
-      })
-      .catch(error => {
-        console.error('Error searching for player:', error);
-        setSearchedPlayer(null);
-      });
+    const player = playerStats.find(player => player.playerName.toLowerCase() === searchTerm.toLowerCase());
+    setSearchedPlayer(player);
   };
 
-  const generateRandomGames = () => {
-    const games = ['Fortnite', 'COD', 'Overwatch', 'League of Legends', 'Apex Legends', 'FIFA', 'Rocket League', 'Valorant', 'Counter-Strike'];
-    const randomIndex1 = Math.floor(Math.random() * games.length);
-    let randomIndex2 = Math.floor(Math.random() * games.length);
-    while (randomIndex2 === randomIndex1) {
-      randomIndex2 = Math.floor(Math.random() * games.length);
-    }
-    return [`${games[randomIndex1]}     ${games[randomIndex2]}`];
+  const handleInputChange = (event, value) => {
+    setSearchTerm(value);
   };
+
+  const filteredOptions = playerStats.map(player => player.playerName);
 
   return (
     <div style={{ 
@@ -66,8 +60,8 @@ const StatsPage = () => {
       <h1 style={{ marginBottom: '20px' }}>Team Statistics</h1>
       <Autocomplete
         value={searchTerm}
-        onChange={(event, value) => setSearchTerm(value)}
-        options={[]}
+        onChange={handleInputChange}
+        options={filteredOptions}
         renderInput={(params) => <TextField {...params} label="Search Team" variant="outlined" style={{ marginBottom: '20px', width: '300px' }} />}
       />
       <Button variant="contained" onClick={handleSearch} style={{ marginBottom: '20px' }}>Search</Button>
