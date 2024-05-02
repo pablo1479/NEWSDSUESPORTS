@@ -66,9 +66,7 @@ function ToggleCustomTheme({ showCustomTheme, toggleCustomTheme }) {
 }
 
 ToggleCustomTheme.propTypes = {
-  showCustomTheme: PropTypes.shape({
-    valueOf: PropTypes.func.isRequired,
-  }).isRequired,
+  showCustomTheme: PropTypes.bool.isRequired,
   toggleCustomTheme: PropTypes.func.isRequired,
 };
 
@@ -105,9 +103,9 @@ export default function Checkout() {
     setMode((prev) => (prev === 'dark' ? 'light' : 'dark'));
   };
 
-  const toggleCustomTheme = () => {
-    setShowCustomTheme((prev) => !prev);
-  };
+  const toggleCustomTheme = React.useCallback(() => {
+    setShowCustomTheme((prev) => !prev); // Toggle the state value
+  }, []);
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
