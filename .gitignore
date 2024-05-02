@@ -1,2 +1,2 @@
-node_modules/
-venv/
+# Ignore node_modules cache files
+node_modules/.cache/
