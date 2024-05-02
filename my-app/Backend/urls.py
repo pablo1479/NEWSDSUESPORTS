@@ -7,4 +7,5 @@ urlpatterns = [
     path('api/logout/', LogoutAPIView.as_view(), name='logout'),
     path('api/merchandise/', MerchandiseListCreateAPIView.as_view(), name='merchandise-list-create'),
     path('api/streams/', StreamListAPIView.as_view(), name='stream-list'),
+    path('api/merchandise/<int:pk>/', MerchandiseDetailAPIView.as_view(), name='merchandise-detail'),
 ]

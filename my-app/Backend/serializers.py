@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, Merchandise, Stream
+from .models import User, Merchandise, Stream, Inventory
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -14,4 +14,9 @@ class MerchandiseSerializer(serializers.ModelSerializer):
 class StreamSerializer(serializers.ModelSerializer):
     class Meta:
         model = Stream
+        fields = '__all__'
+
+class InventorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Inventory
         fields = '__all__'

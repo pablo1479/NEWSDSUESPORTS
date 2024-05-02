@@ -1,10 +1,31 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .models import User, Merchandise, Stream
-from .serializers import UserSerializer, MerchandiseSerializer, StreamSerializer
+from .models import User, Merchandise, Stream, Inventory
+from .serializers import UserSerializer, MerchandiseSerializer, StreamSerializer, InventorySerializer
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import AllowAny
+
+class MerchandiseListCreateAPIView(APIView):
+    def get(self, request):
+        merchandise = Merchandise.objects.all()
+        serializer = MerchandiseSerializer(merchandise, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = MerchandiseSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def put(self, request, pk):
+        merchandise = Merchandise.objects.get(pk=pk)
+        serializer = MerchandiseSerializer(merchandise, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class RegisterAPIView(APIView):
     def post(self, request):
